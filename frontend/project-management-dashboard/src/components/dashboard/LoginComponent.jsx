@@ -1,17 +1,39 @@
-import React, { Component } from "react"
+import React, { Component } from "react";
+import AuthenicationService from "./AuthenicationService.js";
 
 class LoginComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
             username: "",
-            password: ""
+            password: "",
+            loginFailed: false,
+            loginSuccess: false,
         }
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.closeNotification = this.closeNotification.bind(this);
     }
 
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value });
+    }
+    
+    handleSubmit(event) {
+        if(this.state.username==="test" && this.state.password==="test") {
+            AuthenicationService.successfulLogin(this.state.username, this.state.password);
+            this.props.history.push(`/${this.state.username}/dashboard/`);
+            this.setState({loginFailed: false});
+            this.setState({loginSuccess: true})
+        } else {
+            this.setState({loginSuccess: false})
+            this.setState({loginFailed: true})
+            event.preventDefault();
+        }
+    }
+    
+    closeNotification(event) {
+        this.setState({loginFailed: false});
     }
 
     render() {
@@ -21,7 +43,7 @@ class LoginComponent extends Component {
                     <div className="container">
                         <div className="column is-centered">
                             <div className="column is-4 is-offset-4">
-                                <form action="" className="box">
+                                <form onSubmit={this.handleSubmit} className="box">
                                     <div className="field">
                                         <label className="label has-text-weight-semibold has-text-justified is-size-5">
                                             Username
@@ -37,6 +59,7 @@ class LoginComponent extends Component {
                                                 <i className="fas fa-envelope">
                                                 </i>
                                             </span>
+                                            {this.state.usernameIsBlank && <p className="help is-danger">Please enter a valid password.</p>}
                                         </div>
                                     </div>
                                     <div className="field">
@@ -63,16 +86,12 @@ class LoginComponent extends Component {
                                             </button>
                                         </p>
                                     </div>
+                                    {this.state.loginFailed && <div className="notification is-centered is-danger"><button onClick={this.closeNotification} className="delete"></button>Invalid Username or Password</div>}
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                {/* <h1>Login</h1>
-                <section className="container">
-                    <input type="text" name="username" value={this.state.username} className="input is-rounded" placeholder="Username"/> 
-                    <input type="password" name="password" value={this.state.password} />
-                </section> */}
             </section>
         )
     }
