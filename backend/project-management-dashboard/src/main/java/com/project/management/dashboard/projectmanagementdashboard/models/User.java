@@ -1,4 +1,4 @@
-package com.project.management.dashboard.projectmanagementdashboard.model;
+package com.project.management.dashboard.projectmanagementdashboard.models;
 
 import javax.persistence.*;
 
@@ -6,8 +6,8 @@ import javax.persistence.*;
 @Table (name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue
+    private Long id;
     private String username;
     private String role;
     private String password;
@@ -15,18 +15,18 @@ public class User {
     public User() {
     }
 
-    public User(Integer id, String username, String role, String password) {
+    public User(Long id, String username, String role, String password) {
         this.id = id;
         this.username = username;
         this.role = role;
         this.password = password;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
