@@ -11,18 +11,16 @@ class DashboardApp extends Component {
         return(
             <Router>
                 <div>
-                    <>
-                        <Router>
-                                <HeaderComponent />
-                                <Switch>
-                                    <Route path="/" exact component={LoginComponent} />
-                                    <Route path="/login" component={LoginComponent} />
-                                    <Route path="/dashboard" component={DashboardComponent} />
-                                    <Route path="/logout" component={LogoutComponent} />
-                                </Switch>
-                                <FooterComponent />
-                        </Router>
-                    </>
+                    <Router>
+                            <HeaderComponent />
+                            <Switch>
+                                <Route path="/" exact component={LoginComponent} />
+                                <Route path="/login" component={LoginComponent} />
+                                <Route path="/dashboard" component={DashboardComponent} />
+                                <Route path="/logout" component={LogoutComponent} />
+                            </Switch>
+                            <FooterComponent />
+                    </Router>
                 </div>
             </Router>
         )
