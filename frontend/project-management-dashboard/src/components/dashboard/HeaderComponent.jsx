@@ -8,7 +8,7 @@ class HeaderComponent extends Component {
         const isLoggedIn = AuthenicationService.isLoggedIn();
         return(
             <header>
-                <nav className="navbar">
+                <nav className="navbar is-spaced">
                     <div className="navbar-menu">
                         <div className="navbar-brand"><a className="navbar-item">Project Management Panel</a></div>
                         <div className="navbar-start">
@@ -23,6 +23,9 @@ class HeaderComponent extends Component {
                                 <div className="navbar-item has-dropdown is-hoverable">
                                     <a className="navbar-link">More</a>
                                     <div className="navbar-dropdown">
+                                        <div className="navbar-item">
+                                            <Link to="/manage-users">Manage Users</Link>
+                                        </div>
                                         <div className="navbar-item">
                                             <Link to="/logout" onClick={AuthenicationService.logoutUser}>Logout</Link>
                                         </div>

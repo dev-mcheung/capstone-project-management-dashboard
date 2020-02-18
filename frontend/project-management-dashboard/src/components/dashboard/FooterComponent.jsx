@@ -4,9 +4,9 @@ import React, {Component} from 'react'
 class FooterComponent extends Component {
     render() {
         return (
-            <footer className="footer has-background-grey">
+            <footer className="footer has-background-white">
                 <div className="container has-text-centered">
-                    <span className="has-text-grey-lighter">Made by <a 
+                    <span>Made by <a 
                     href="https://github.com/dev-mcheung" 
                     target="_blank" 
                     rel="noopener noreferrer">Dev-mcheung</a> © 2020</span>

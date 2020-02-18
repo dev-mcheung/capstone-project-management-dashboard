@@ -5,6 +5,7 @@ import FooterComponent from './FooterComponent.jsx';
 import DashboardComponent from './DashboardComponent.jsx';
 import HeaderComponent from './HeaderComponent.jsx';
 import LogoutComponent from './LogoutComponent.jsx';
+import ManageUserComponent from './ManageUserComponent.jsx';
 
 class DashboardApp extends Component {
     render() {
@@ -18,6 +19,7 @@ class DashboardApp extends Component {
                                 <Route path="/login" component={LoginComponent} />
                                 <Route path="/dashboard" component={DashboardComponent} />
                                 <Route path="/logout" component={LogoutComponent} />
+                                <Route path="/manage-users" component={ManageUserComponent} />
                             </Switch>
                             <FooterComponent />
                     </Router>
