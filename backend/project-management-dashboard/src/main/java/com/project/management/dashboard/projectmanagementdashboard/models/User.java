@@ -1,12 +1,12 @@
 package com.project.management.dashboard.projectmanagementdashboard.models;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table (name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "first_name", nullable = false)
@@ -24,6 +24,9 @@ public class User {
     @Column(name = "created_by", nullable = false)
     private String createdBy;
 
+    @Column(name = "created_on", nullable = false)
+    private Date createdOn;
+
     @Column(name = "location", nullable = false)
     private String location;
 
@@ -31,13 +34,14 @@ public class User {
 
     }
 
-    public User(Long id, String firstName, String lastName, String role, String emailAddress, String createdBy, String location) {
+    public User(Long id, String firstName, String lastName, String role, String emailAddress, String createdBy, Date createdOn, String location) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
         this.emailAddress = emailAddress;
         this.createdBy = createdBy;
+        this.createdOn = createdOn;
         this.location = location;
     }
 
@@ -97,6 +101,14 @@ public class User {
         this.location = location;
     }
 
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -105,6 +117,7 @@ public class User {
                 ", role='" + role + '\'' +
                 ", emailAddress='" + emailAddress + '\'' +
                 ", createdBy='" + createdBy + '\'' +
+                ", createdOn=" + createdOn +
                 ", location='" + location + '\'' +
                 '}';
     }
