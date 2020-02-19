@@ -5,7 +5,7 @@ import FooterComponent from './FooterComponent.jsx';
 import DashboardComponent from './DashboardComponent.jsx';
 import HeaderComponent from './HeaderComponent.jsx';
 import LogoutComponent from './LogoutComponent.jsx';
-import ManageUserComponent from './ManageUserComponent.jsx';
+import ManageUserComponent from '../administration/addUser.jsx';
 import ErrorRoute from './ErrorRoute.jsx';
 
 class DashboardApp extends Component {
@@ -17,8 +17,8 @@ class DashboardApp extends Component {
                     <Route path="/" exact component={LoginComponent} />
                     <Route path="/login" component={LoginComponent} />
                     <Route path="/users/:name/dashboard" exact component={DashboardComponent} />
-                    <Route path="/logout" component={LogoutComponent} />
                     <Route path="/users/:name/dashboard/administration" exact component={ManageUserComponent} />
+                    <Route path="/logout" component={LogoutComponent} />
                     <Route component={ErrorRoute} />
                 </Switch>
                 <FooterComponent />
