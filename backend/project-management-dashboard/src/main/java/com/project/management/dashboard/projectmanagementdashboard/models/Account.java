@@ -10,6 +10,9 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @OneToOne(mappedBy = "account")
+    private User user;
+
     @Column(name="username", nullable = false)
     private String username;
 

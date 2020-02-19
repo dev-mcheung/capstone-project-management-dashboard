@@ -9,6 +9,11 @@ public class User {
     @Id
     private Long id;
 
+    @OneToOne
+    @JoinColumn(name = "id")
+    @MapsId
+    private Account account;
+
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
