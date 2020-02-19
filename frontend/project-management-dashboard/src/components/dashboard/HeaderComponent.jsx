@@ -14,7 +14,7 @@ class HeaderComponent extends Component {
                         <div className="navbar-start">
                             {
                                 isLoggedIn && <div className="navbar-item">
-                                    <Link to={`/${AuthenicationService.getUsername()}/dashboard`}>Dashboard</Link>
+                                    <Link to={`users/${AuthenicationService.getUsername()}/dashboard`}>Dashboard</Link>
                                 </div>
                             }
                         </div>

@@ -22,7 +22,7 @@ class LoginComponent extends Component {
     handleSubmit(event) {
         if(this.state.username==="test" && this.state.password==="test") {
             AuthenicationService.successfulLogin(this.state.username, this.state.password);
-            this.props.history.push(`/${this.state.username}/dashboard/`);
+            this.props.history.push(`/users/${this.state.username}/dashboard`);
             this.setState({loginFailed: false});
             this.setState({loginSuccess: true})
         } else {
