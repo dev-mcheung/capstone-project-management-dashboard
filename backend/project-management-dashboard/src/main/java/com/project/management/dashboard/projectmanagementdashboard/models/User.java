@@ -6,20 +6,39 @@ import javax.persistence.*;
 @Table (name = "users")
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String username;
+
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+
+    @Column(name ="role", nullable = false)
     private String role;
-    private String password;
+
+    @Column(name="email_address", nullable = false)
+    private String emailAddress;
+
+    @Column(name = "created_by", nullable = false)
+    private String createdBy;
+
+    @Column(name = "location", nullable = false)
+    private String location;
 
     public User() {
+
     }
 
-    public User(Long id, String username, String role, String password) {
+    public User(Long id, String firstName, String lastName, String role, String emailAddress, String createdBy, String location) {
         this.id = id;
-        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.role = role;
-        this.password = password;
+        this.emailAddress = emailAddress;
+        this.createdBy = createdBy;
+        this.location = location;
     }
 
     public Long getId() {
@@ -30,12 +49,20 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getRole() {
@@ -46,20 +73,39 @@ public class User {
         this.role = role;
     }
 
-    public String getPassword() {
-        return password;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "username='" + username + '\'' +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", role='" + role + '\'' +
-                ", password='" + password + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", createdBy='" + createdBy + '\'' +
+                ", location='" + location + '\'' +
                 '}';
     }
 }
