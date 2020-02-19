@@ -6,6 +6,7 @@ import AuthenicationService from './AuthenicationService'
 class HeaderComponent extends Component {
     render() {
         const isLoggedIn = AuthenicationService.isLoggedIn();
+        const getUsername = AuthenicationService.getUsername();
         return(
             <header>
                 <nav className="navbar is-spaced">
@@ -14,7 +15,17 @@ class HeaderComponent extends Component {
                         <div className="navbar-start">
                             {
                                 isLoggedIn && <div className="navbar-item">
-                                    <Link to={`users/${AuthenicationService.getUsername()}/dashboard`}>Dashboard</Link>
+                                    <Link to={`/users/${getUsername}/dashboard`}>Dashboard</Link>
+                                </div>
+                            }
+                            {
+                                isLoggedIn && <div className="navbar-item has-dropdown is-hoverable">
+                                    <Link to={`/users/${getUsername}/dashboard/administration`} className="navbar-link">Administration</Link>
+                                    <div className="navbar-dropdown">
+                                        <div className="navbar-item">
+                                            <Link to={`/users/${getUsername}/dashboard/administration/manage-users`}>Manage Users</Link>
+                                        </div>
+                                    </div>
                                 </div>
                             }
                         </div>
@@ -23,9 +34,6 @@ class HeaderComponent extends Component {
                                 <div className="navbar-item has-dropdown is-hoverable">
                                     <a className="navbar-link">More</a>
                                     <div className="navbar-dropdown">
-                                        <div className="navbar-item">
-                                            <Link to="/manage-users">Manage Users</Link>
-                                        </div>
                                         <div className="navbar-item">
                                             <Link to="/logout" onClick={AuthenicationService.logoutUser}>Logout</Link>
                                         </div>
