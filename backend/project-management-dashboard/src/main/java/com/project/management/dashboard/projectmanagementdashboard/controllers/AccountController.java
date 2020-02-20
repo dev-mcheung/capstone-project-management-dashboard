@@ -10,6 +10,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000", allowCredentials= "true", allowedHeaders = "*")
@@ -21,6 +22,11 @@ public class AccountController {
     @GetMapping("/users")
     public List<Account> getAllUsers() {
         return accountRepository.findAll();
+    }
+
+    @GetMapping("/users/{id}")
+    public Optional<Account> getUsers(@PathVariable long id) {
+        return accountRepository.findById(id);
     }
 
     @PostMapping("/users")
