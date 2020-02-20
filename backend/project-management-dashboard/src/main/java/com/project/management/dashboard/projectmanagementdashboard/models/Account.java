@@ -19,10 +19,18 @@ public class Account {
     @Column(name="password", nullable = false)
     private String password;
 
-    public Account(Long id, String username, String password) {
+    @Column(name="email_address", nullable = false)
+    private String emailAddress;
+
+    public Account(Long id, String username, String password, String emailAddress) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.emailAddress = emailAddress;
+    }
+
+    public Account() {
+
     }
 
     public Long getId() {
@@ -49,11 +57,21 @@ public class Account {
         this.password = password;
     }
 
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
-                "username='" + username + '\'' +
+                "user=" + user +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
                 '}';
     }
 }
