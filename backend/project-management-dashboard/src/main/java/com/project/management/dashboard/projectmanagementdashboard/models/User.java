@@ -23,9 +23,6 @@ public class User {
     @Column(name ="role", nullable = false)
     private String role;
 
-    @Column(name="email_address", nullable = false)
-    private String emailAddress;
-
     @Column(name = "created_by", nullable = false)
     private String createdBy;
 
@@ -39,12 +36,11 @@ public class User {
 
     }
 
-    public User(Long id, String firstName, String lastName, String role, String emailAddress, String createdBy, Date createdOn, String location) {
+    public User(Long id, String firstName, String lastName, String role, String createdBy, Date createdOn, String location) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
-        this.emailAddress = emailAddress;
         this.createdBy = createdBy;
         this.createdOn = createdOn;
         this.location = location;
@@ -82,14 +78,6 @@ public class User {
         this.role = role;
     }
 
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
     public String getCreatedBy() {
         return createdBy;
     }
@@ -120,7 +108,6 @@ public class User {
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", role='" + role + '\'' +
-                ", emailAddress='" + emailAddress + '\'' +
                 ", createdBy='" + createdBy + '\'' +
                 ", createdOn=" + createdOn +
                 ", location='" + location + '\'' +
