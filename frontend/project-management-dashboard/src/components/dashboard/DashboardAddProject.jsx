@@ -7,12 +7,12 @@ class DashboardAddProject extends Component {
         this.state = {
             title: '',
             description: '',
-            projectOwner: '',
-            projectManager: '',
-            techLead: '',
-            frontEnd: '',
-            backEnd: '',
-            testers: '',
+            projectOwner: [''],
+            projectManager: [''],
+            techLead: [''],
+            frontEnd: [''],
+            backEnd: [''],
+            testers: [''],
             priority: '',
             currentStatus: '',
             creationDate: '',
@@ -20,6 +20,7 @@ class DashboardAddProject extends Component {
             deadline: ''
         }
         this.validate = this.validate.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     validate(values) {
@@ -36,6 +37,12 @@ class DashboardAddProject extends Component {
             errors.title = "Enter at least 5 characters"
         }
     }
+    
+    handleChange(event) {
+        this.setState({
+            [event.target.name]: Array.from(event.target.selectedOptions, (item) => item.value)
+        });
+    }
 
     render() {
         return(
@@ -45,8 +52,8 @@ class DashboardAddProject extends Component {
                     initialValues={{ 
                         title: '', 
                         description: '',
-                        projectOwner: '',
-                        projectManager: '',
+                        projectOwner: [''],
+                        projectManager: [''],
                         techLead: '',
                         frontEnd: '',
                         backEnd: '',
@@ -76,9 +83,14 @@ class DashboardAddProject extends Component {
                                     <div>
                                         <p className="heading">Project Managers</p>
                                         <div className="select is-multiple">
-                                            <Field as="select" name="projectManager" multiple className="">
-                                                <option value="test1">test1</option>
-                                                <option value="test2">test2</option>
+                                            <Field 
+                                                as="select" 
+                                                name="projectManager" 
+                                                multiple={true} 
+                                                value={this.state.projectManager}
+                                                onChange={this.handleChange}>
+                                                    <option value="test1">test1</option>
+                                                    <option value="test2">test2</option>
                                             </Field>
                                         </div>
                                     </div>
@@ -87,9 +99,14 @@ class DashboardAddProject extends Component {
                                     <div>
                                         <p className="heading">Project Owners</p>
                                         <div className="select is-multiple">
-                                            <Field as="select" name="projectOwner" multiple className="">
-                                                <option value="test1">test1</option>
-                                                <option value="test2">test2</option>
+                                            <Field 
+                                                as="select" 
+                                                name="projectOwner" 
+                                                multiple={true} 
+                                                value={this.state.projectOwner}
+                                                onChange={this.handleChange}>
+                                                    <option value="test1">test1</option>
+                                                    <option value="test2">test2</option>
                                             </Field>
                                         </div>
                                     </div>
@@ -98,9 +115,14 @@ class DashboardAddProject extends Component {
                                     <div>
                                         <p className="heading">Tech Leads</p>
                                         <div className="select is-multiple">
-                                            <Field as="select" name="techLead" multiple className="">
-                                                <option value="test1">test1</option>
-                                                <option value="test2">test2</option>
+                                            <Field 
+                                                as="select" 
+                                                name="techLead" 
+                                                multiple={true} 
+                                                value={this.state.techLead}
+                                                onChange={this.handleChange}>
+                                                    <option value="test1">test1</option>
+                                                    <option value="test2">test2</option>
                                             </Field>
                                         </div>
                                     </div>
@@ -109,9 +131,14 @@ class DashboardAddProject extends Component {
                                     <div>
                                         <p className="heading">Frontend Devs</p>
                                         <div className="select is-multiple">
-                                            <Field as="select" name="frontEnd" multiple className="">
-                                                <option value="test1">test1</option>
-                                                <option value="test2">test2</option>
+                                            <Field 
+                                                as="select" 
+                                                name="frontEnd" 
+                                                multiple={true} 
+                                                value={this.state.frontEnd}
+                                                onChange={this.handleChange}>
+                                                    <option value="test1">test1</option>
+                                                    <option value="test2">test2</option>
                                             </Field>
                                         </div>
                                     </div>
@@ -120,9 +147,14 @@ class DashboardAddProject extends Component {
                                     <div>
                                         <p className="heading">Backend Devs</p>
                                         <div className="select is-multiple">
-                                            <Field as="select" name="backEnd" multiple className="">
-                                                <option value="test1">test1</option>
-                                                <option value="test2">test2</option>
+                                            <Field 
+                                                as="select" 
+                                                name="backEnd" 
+                                                multiple={true} 
+                                                value={this.state.backEnd}
+                                                onChange={this.handleChange}>
+                                                    <option value="test1">test1</option>
+                                                    <option value="test2">test2</option>
                                             </Field>
                                         </div>
                                     </div>
@@ -131,9 +163,13 @@ class DashboardAddProject extends Component {
                                     <div>
                                         <p className="heading">Testers/QAs</p>
                                         <div className="select is-multiple">
-                                            <Field as="select" name="testers" multiple>
-                                                <option value="test1">test1</option>
-                                                <option value="test2">test2</option>
+                                            <Field as="select" 
+                                                name="testers" 
+                                                multiple={true} 
+                                                value={this.state.testers}
+                                                onChange={this.handleChange}>
+                                                    <option value="test1">test1</option>
+                                                    <option value="test2">test2</option>
                                             </Field>
                                         </div>
                                     </div>
@@ -142,7 +178,7 @@ class DashboardAddProject extends Component {
                             </div>
                             <fieldset className="field">
                                 <label className="label">Deadline</label>
-                                <Field className="" type="date" name="deadline" />
+                                <Field className="calendar" type="date" name="deadline" />
                             </fieldset>
                         </Form>
                     }
