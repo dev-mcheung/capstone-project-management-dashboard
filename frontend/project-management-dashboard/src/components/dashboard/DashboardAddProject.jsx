@@ -140,19 +140,10 @@ class DashboardAddProject extends Component {
                                 </fieldset>
                                 <div className="level-item"></div>
                             </div>
-                            {/*<label className="label">Current Team</label>
-                            <table className="table">
-                                <thead className="thead">
-                                    <tr>
-                                        <th>Project Manager</th>
-                                        <th>Project Owner</th>
-                                        <th>Tech Lead</th>
-                                        <th>Frontend Dev</th>
-                                        <th>Backend Dev</th>
-                                        <th>Testers/QA</th>
-                                    </tr>
-                                </thead>
-                            </table>*/}
+                            <fieldset className="field">
+                                <label className="label">Deadline</label>
+                                <Field className="" type="date" name="deadline" />
+                            </fieldset>
                         </Form>
                     }
                 </Formik>
