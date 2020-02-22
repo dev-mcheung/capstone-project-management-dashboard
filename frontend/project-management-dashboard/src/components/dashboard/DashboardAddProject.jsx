@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Formik, ErrorMessage, Form, Field} from 'formik';
+import * as Yup from 'yup';
 
 class DashboardAddProject extends Component {
     constructor(props){
@@ -19,23 +20,8 @@ class DashboardAddProject extends Component {
             createdBy: '',
             deadline: ''
         }
-        this.validate = this.validate.bind(this);
         this.handleChange = this.handleChange.bind(this);
-    }
-
-    validate(values) {
-        const errors = {};
-        if(!values.title) {
-            errors.title = "Enter a Title"
-        } else if(values.description.length < 2) {
-            errors.title = "Enter at least 2 characters"
-        } 
-
-        if(!values.description) {
-            errors.description = "Enter a description"
-        } else if(values.description.length < 5) {
-            errors.title = "Enter at least 5 characters"
-        }
+        this.onSubmit = this.onSubmit.bind(this);
     }
     
     handleChange(event) {
@@ -43,39 +29,56 @@ class DashboardAddProject extends Component {
             [event.target.name]: Array.from(event.target.selectedOptions, (item) => item.value)
         });
     }
+    
+    onSubmit(event) {
+        return;
+    }
 
     render() {
+        const addProjectSchema = Yup.object().shape({
+          title: Yup.string()
+            .min(1, 'Title is too short')
+            .max(70, 'Title is too long')
+            .required('Enter in a title'),
+          description: Yup.string()
+            .min(5, 'Description is too short')
+            .required('Enter in a description'),
+        });
         return(
             <div className="container">
                 <h1 className="title is-1">Create a new project</h1>
                 <Formik
                     initialValues={{ 
-                        title: '', 
+                        title: '',
                         description: '',
                         projectOwner: [''],
                         projectManager: [''],
-                        techLead: '',
-                        frontEnd: '',
-                        backEnd: '',
-                        testers: '',
+                        techLead: [''],
+                        frontEnd: [''],
+                        backEnd: [''],
+                        testers: [''],
                         priority: '',
                         currentStatus: '',
                         creationDate: '',
                         createdBy: '',
                         deadline: ''
                     }}
-                    validate={this.validate}>
+                    validateOnChange={true}
+                    validateOnBlur={true}
+                    validationSchema={addProjectSchema}
+                    enableReinitialize={true}
+                    onSubmit={this.onSubmit}>
                     {
-                        (props) => <Form className="container">
-                            <ErrorMessage name="title" />
-                            <ErrorMessage name="description" />
+                        (props) => <Form className="container" onSubmit={this.onSubmit}>
                             <fieldset className="field">
                                 <label className="label">Title</label>
                                 <Field className="input" type="text" name="title" />
+                                <ErrorMessage name="title" component="p" className="help is-danger"/>
                             </fieldset>
                             <fieldset className="field">
                                 <label className="label">Description</label>
                                 <Field className="textarea" as="textarea" name="description" />
+                                <ErrorMessage name="description" component="p" className="help is-danger"/>
                             </fieldset>
                             <label className="label">Team Assignment</label>
                             <div className="level">
@@ -180,6 +183,7 @@ class DashboardAddProject extends Component {
                                 <label className="label">Deadline</label>
                                 <Field className="calendar" type="date" name="deadline" />
                             </fieldset>
+                            <button className="button is-success" type="submit">Add</button>
                         </Form>
                     }
                 </Formik>
