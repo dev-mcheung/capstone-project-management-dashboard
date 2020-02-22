@@ -7,6 +7,7 @@ import HeaderComponent from './HeaderComponent.jsx';
 import LogoutComponent from './LogoutComponent.jsx';
 import ManageUserComponent from '../administration/addUser.jsx';
 import ErrorRoute from './ErrorRoute.jsx';
+import DashboardAddProject from './DashboardAddProject.jsx';
 
 class DashboardApp extends Component {
     render() {
@@ -18,6 +19,7 @@ class DashboardApp extends Component {
                     <Route path="/login" component={LoginComponent} />
                     <Route path="/users/:name/dashboard" exact component={DashboardComponent} />
                     <Route path="/users/:name/dashboard/administration" exact component={ManageUserComponent} />
+                    <Route path="/users/:name/dashboard/projects/add" exact component={DashboardAddProject} />
                     <Route path="/logout" component={LogoutComponent} />
                     <Route component={ErrorRoute} />
                 </Switch>

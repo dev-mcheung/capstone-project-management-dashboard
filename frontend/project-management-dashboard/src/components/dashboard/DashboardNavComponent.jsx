@@ -18,7 +18,7 @@ class DashboardNavComponent extends Component {
                         </div>
                     </div>
                     <div className="level-right">
-                        <Link to="/users/:name/dashboard/project/add" className="button is-success">
+                        <Link to="/users/:name/dashboard/projects/add" className="button is-success">
                             New Project
                         </Link>
                     </div>
