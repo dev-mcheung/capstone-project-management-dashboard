@@ -96,7 +96,7 @@ class DashboardAddProject extends Component {
                                                     {
                                                         projectManagerList.map(
                                                             (member) =>
-                                                                <option value={member}>{member}</option>
+                                                                <option value={member} key={member}>{member}</option>
                                                         )
                                                     }
                                             </Field>
@@ -116,7 +116,7 @@ class DashboardAddProject extends Component {
                                                     {
                                                         projectOwnerList.map(
                                                             (member) =>
-                                                                <option value={member}>{member}</option>
+                                                                <option value={member} key={member}>{member}</option>
                                                         )
                                                     }
                                             </Field>
@@ -136,7 +136,7 @@ class DashboardAddProject extends Component {
                                                     {
                                                         techLeadList.map(
                                                             (member) =>
-                                                                <option value={member}>{member}</option>
+                                                                <option value={member} key={member}>{member}</option>
                                                         )
                                                     }
                                             </Field>
@@ -156,7 +156,7 @@ class DashboardAddProject extends Component {
                                                     {
                                                         frontEndList.map(
                                                             (member) =>
-                                                                <option value={member}>{member}</option>
+                                                                <option value={member} key={member}>{member}</option>
                                                         )
                                                     }
                                             </Field>
@@ -176,7 +176,7 @@ class DashboardAddProject extends Component {
                                                     {
                                                         backEndList.map(
                                                             (member) =>
-                                                                <option value={member}>{member}</option>
+                                                                <option value={member} key={member}>{member}</option>
                                                         )
                                                     }
                                             </Field>
@@ -195,7 +195,7 @@ class DashboardAddProject extends Component {
                                                     {
                                                         testersList.map(
                                                             (member) =>
-                                                                <option value={member}>{member}</option>
+                                                                <option value={member} key={member}>{member}</option>
                                                         )
                                                     }
                                             </Field>
