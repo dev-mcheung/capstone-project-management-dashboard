@@ -33,7 +33,7 @@ class ManageUserComponent extends Component {
                                 <li>Manage Users
                                     <ul>
                                         <li onClick={this.renderAddUser}>
-                                                <a>Add users</a>
+                                                <a href="!#">Add users</a>
                                         </li>
                                     </ul>
                                 </li>

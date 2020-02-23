@@ -11,7 +11,7 @@ class DashboardNavComponent extends Component {
                             <input className="input" type="text" placeholder="Find a project">
                             </input>
                             <div className="control">
-                                <a className="button is-info">
+                                <a href="!#" className="button is-info">
                                     Search
                                 </a>
                             </div>
