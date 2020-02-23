@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Formik, ErrorMessage, Form, Field} from 'formik';
 import * as Yup from 'yup';
+import {projectManagerList, projectOwnerList, techLeadList, frontEndList, backEndList, testersList} from '../data/MemberData.js';
 
 class DashboardAddProject extends Component {
     constructor(props){
@@ -92,8 +93,12 @@ class DashboardAddProject extends Component {
                                                 multiple={true} 
                                                 value={this.state.projectManager}
                                                 onChange={this.handleChange}>
-                                                    <option value="test1">test1</option>
-                                                    <option value="test2">test2</option>
+                                                    {
+                                                        projectManagerList.map(
+                                                            (member) =>
+                                                                <option value={member}>{member}</option>
+                                                        )
+                                                    }
                                             </Field>
                                         </div>
                                     </div>
@@ -108,8 +113,12 @@ class DashboardAddProject extends Component {
                                                 multiple={true} 
                                                 value={this.state.projectOwner}
                                                 onChange={this.handleChange}>
-                                                    <option value="test1">test1</option>
-                                                    <option value="test2">test2</option>
+                                                    {
+                                                        projectOwnerList.map(
+                                                            (member) =>
+                                                                <option value={member}>{member}</option>
+                                                        )
+                                                    }
                                             </Field>
                                         </div>
                                     </div>
@@ -124,8 +133,12 @@ class DashboardAddProject extends Component {
                                                 multiple={true} 
                                                 value={this.state.techLead}
                                                 onChange={this.handleChange}>
-                                                    <option value="test1">test1</option>
-                                                    <option value="test2">test2</option>
+                                                    {
+                                                        techLeadList.map(
+                                                            (member) =>
+                                                                <option value={member}>{member}</option>
+                                                        )
+                                                    }
                                             </Field>
                                         </div>
                                     </div>
@@ -140,8 +153,12 @@ class DashboardAddProject extends Component {
                                                 multiple={true} 
                                                 value={this.state.frontEnd}
                                                 onChange={this.handleChange}>
-                                                    <option value="test1">test1</option>
-                                                    <option value="test2">test2</option>
+                                                    {
+                                                        frontEndList.map(
+                                                            (member) =>
+                                                                <option value={member}>{member}</option>
+                                                        )
+                                                    }
                                             </Field>
                                         </div>
                                     </div>
@@ -156,8 +173,12 @@ class DashboardAddProject extends Component {
                                                 multiple={true} 
                                                 value={this.state.backEnd}
                                                 onChange={this.handleChange}>
-                                                    <option value="test1">test1</option>
-                                                    <option value="test2">test2</option>
+                                                    {
+                                                        backEndList.map(
+                                                            (member) =>
+                                                                <option value={member}>{member}</option>
+                                                        )
+                                                    }
                                             </Field>
                                         </div>
                                     </div>
@@ -171,18 +192,53 @@ class DashboardAddProject extends Component {
                                                 multiple={true} 
                                                 value={this.state.testers}
                                                 onChange={this.handleChange}>
-                                                    <option value="test1">test1</option>
-                                                    <option value="test2">test2</option>
+                                                    {
+                                                        testersList.map(
+                                                            (member) =>
+                                                                <option value={member}>{member}</option>
+                                                        )
+                                                    }
                                             </Field>
                                         </div>
                                     </div>
                                 </fieldset>
                                 <div className="level-item"></div>
                             </div>
-                            <fieldset className="field">
-                                <label className="label">Deadline</label>
-                                <Field className="calendar" type="date" name="deadline" />
-                            </fieldset>
+                            <div className="level">
+                                <fieldset className="field level-item">
+                                    <div className="container">
+                                        <label className="label">Deadline</label>
+                                        <Field className="calendar" type="date" name="deadline" />
+                                    </div>
+                                </fieldset>
+                                <fieldset className="field level-item">
+                                    <div className="container">
+                                        <label className="label">Status</label>
+                                        <Field className="select" as="select" name="status" value={this.state.currentStatus}>
+                                            <option value="Planning">Planning</option>
+                                            <option value="Analysis">Analysis</option>
+                                            <option value="Design">Design</option>
+                                            <option value="Implementation">Implementation</option>
+                                            <option value="Design">Design</option>
+                                            <option value="Testing/Intergration">Testing/Intergration</option>
+                                            <option value="Maintenance">Maintenance</option>
+                                        </Field>
+                                    </div>
+                                </fieldset>
+                                <fieldset className="field level-item">
+                                    <div className="container">
+                                        <label className="label">Priority</label>
+                                        <Field className="select" as="select" name="status" value={this.state.priority}>
+                                            <option value="longTerm">Long Term</option>
+                                            <option value="low">Low Priority</option>
+                                            <option value="medium">Medium Priority</option>
+                                            <option value="high">High Priority</option>
+                                            <option value="urgent">Urgent Priority</option>
+                                        </Field>
+                                    </div>
+                                </fieldset>
+                                <div className="level-item"></div>
+                            </div>
                             <button className="button is-success" type="submit">Add</button>
                         </Form>
                     }
