@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import AuthenicationService from './AuthenicationService.js';
 
 class DashboardNavComponent extends Component {
     render() {
+        const getUsername = AuthenicationService.getUsername();
         return(
             <div className="container">
                 <div className="level">
@@ -18,7 +20,7 @@ class DashboardNavComponent extends Component {
                         </div>
                     </div>
                     <div className="level-right">
-                        <Link to="/users/:name/dashboard/projects/add" className="button is-success">
+                        <Link to={`/users/${getUsername}/dashboard/projects/add`} className="button is-success">
                             New Project
                         </Link>
                     </div>
