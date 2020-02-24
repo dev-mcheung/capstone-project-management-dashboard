@@ -9,12 +9,12 @@ class DashboardAddProject extends Component {
         this.state = {
             title: '',
             description: '',
-            projectOwner: [''],
-            projectManager: [''],
-            techLead: [''],
-            frontEnd: [''],
-            backEnd: [''],
-            testers: [''],
+            projectOwner: [],
+            projectManager: [],
+            techLead: [],
+            frontEnd: [],
+            backEnd: [],
+            testers: [],
             priority: '',
             currentStatus: '',
             creationDate: '',
@@ -23,12 +23,17 @@ class DashboardAddProject extends Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.handleSelectChange = this.handleSelectChange.bind(this);
     }
     
     handleChange(event) {
         this.setState({
             [event.target.name]: Array.from(event.target.selectedOptions, (item) => item.value)
         });
+    }
+
+    handleSelectChange(event) {
+        this.setState({[event.target.name]: event.target.value});
     }
     
     onSubmit(event) {
@@ -52,14 +57,14 @@ class DashboardAddProject extends Component {
                     initialValues={{ 
                         title: '',
                         description: '',
-                        projectOwner: [''],
-                        projectManager: [''],
-                        techLead: [''],
-                        frontEnd: [''],
-                        backEnd: [''],
-                        testers: [''],
-                        priority: '',
-                        currentStatus: '',
+                        projectOwner: [],
+                        projectManager: [],
+                        techLead: [],
+                        frontEnd: [],
+                        backEnd: [],
+                        testers: [],
+                        priority: "medium",
+                        currentStatus: "urgent",
                         creationDate: '',
                         createdBy: '',
                         deadline: ''
@@ -214,7 +219,7 @@ class DashboardAddProject extends Component {
                                 <fieldset className="field level-item">
                                     <div className="container">
                                         <label className="label">Status</label>
-                                        <Field className="select" as="select" name="status" value={this.state.currentStatus}>
+                                        <Field className="select" as="select" name="status" value={this.state.currentStatus} onChange={this.handleSelectChange}>
                                             <option value="Planning">Planning</option>
                                             <option value="Analysis">Analysis</option>
                                             <option value="Design">Design</option>
@@ -228,7 +233,7 @@ class DashboardAddProject extends Component {
                                 <fieldset className="field level-item">
                                     <div className="container">
                                         <label className="label">Priority</label>
-                                        <Field className="select" as="select" name="status" value={this.state.priority}>
+                                        <Field className="select" as="select" name="status" value={this.state.priority} onChange={this.handleSelectChange}>
                                             <option value="longTerm">Long Term</option>
                                             <option value="low">Low Priority</option>
                                             <option value="medium">Medium Priority</option>
@@ -247,5 +252,6 @@ class DashboardAddProject extends Component {
         )
     }
 }
+
 
 export default DashboardAddProject;
