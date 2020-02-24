@@ -1,4 +1,9 @@
 package com.project.management.dashboard.projectmanagementdashboard.models.data;
 
-public interface BackEndRepository {
+import com.project.management.dashboard.projectmanagementdashboard.models.BackEnd;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface BackEndRepository extends JpaRepository<BackEnd, Long> {
 }

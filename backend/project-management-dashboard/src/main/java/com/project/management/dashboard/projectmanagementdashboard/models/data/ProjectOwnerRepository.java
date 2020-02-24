@@ -1,4 +1,7 @@
 package com.project.management.dashboard.projectmanagementdashboard.models.data;
 
-public interface ProjectOwnerRepository {
+import com.project.management.dashboard.projectmanagementdashboard.models.ProjectOwner;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ProjectOwnerRepository extends JpaRepository<ProjectOwner, Long> {
 }
