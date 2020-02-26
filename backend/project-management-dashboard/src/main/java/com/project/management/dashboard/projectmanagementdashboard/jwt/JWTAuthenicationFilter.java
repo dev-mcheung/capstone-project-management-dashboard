@@ -26,10 +26,10 @@ import java.util.Date;
 
 import static com.project.management.dashboard.projectmanagementdashboard.jwt.SecurityConstants.*;
 
-public class JWTAuthenicationFillter extends UsernamePasswordAuthenticationFilter {
+public class JWTAuthenicationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
 
-    public JWTAuthenicationFillter(AuthenticationManager authenticationManager) {
+    public JWTAuthenicationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
 
