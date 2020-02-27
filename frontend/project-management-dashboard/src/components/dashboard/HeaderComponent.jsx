@@ -35,7 +35,7 @@ class HeaderComponent extends Component {
                                     <a href="!#" className="navbar-link">More</a>
                                     <div className="navbar-dropdown">
                                         <div className="navbar-item">
-                                            <Link to="/logout" onClick={AuthenicationService.logoutUser}>Logout</Link>
+                                            <Link to="/logout" onClick={AuthenicationService.jwtLogout}>Logout</Link>
                                         </div>
                                     </div>
                                 </div>

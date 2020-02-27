@@ -21,17 +21,17 @@ class LoginComponent extends Component {
     }
     
     handleSubmit(values) {
-        if(values.username==="test" && values.password==="test") {
-            AuthenicationService.successfulLogin(values.username, values.password);
-            this.props.history.push(`/users/${values.username}/dashboard`);
-        }
-            // this.setState({loginFailed: false});
-            // this.setState({loginSuccess: true})
-        // } else {
-        //     this.setState({loginSuccess: false})
-        //     this.setState({loginFailed: true})
-        //     // event.preventDefault();
-        // }
+        AuthenicationService.executeJwtAuthenticationService(values)
+            .then((response) => {
+                AuthenicationService.registerSuccessfulLoginForJwt(values.username, response.data.token);
+                this.setState({loginSuccess: true});
+                this.setState({loginFailed:false});
+                this.props.history.push(`/users/${values.username}/dashboard`);
+            })
+            .catch ( () => {
+                this.setState({loginFailed:true});
+                this.setState({loginSuccess: false});
+            })
     }
     
     closeNotification(event) {

@@ -8,6 +8,7 @@ import LogoutComponent from './LogoutComponent.jsx';
 import ManageUserComponent from '../administration/addUser.jsx';
 import ErrorRoute from './ErrorRoute.jsx';
 import DashboardAddProject from './DashboardAddProject.jsx';
+import AuthenicatedRoute from './AuthenicatedRoute.jsx';
 
 class DashboardApp extends Component {
     render() {
@@ -17,9 +18,9 @@ class DashboardApp extends Component {
                 <Switch>
                     <Route path="/" exact component={LoginComponent} />
                     <Route path="/login" component={LoginComponent} />
-                    <Route path="/users/:name/dashboard" exact component={DashboardComponent} />
-                    <Route path="/users/:name/dashboard/administration" exact component={ManageUserComponent} />
-                    <Route path="/users/:name/dashboard/projects/add" exact component={DashboardAddProject} />
+                    <AuthenicatedRoute path="/users/:name/dashboard" exact component={DashboardComponent} />
+                    <AuthenicatedRoute path="/users/:name/dashboard/administration" exact component={ManageUserComponent} />
+                    <AuthenicatedRoute path="/users/:name/dashboard/projects/add" exact component={DashboardAddProject} />
                     <Route path="/logout" component={LogoutComponent} />
                     <Route component={ErrorRoute} />
                 </Switch>
