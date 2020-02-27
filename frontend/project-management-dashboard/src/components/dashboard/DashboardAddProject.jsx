@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Formik, ErrorMessage, Form, Field} from 'formik';
 import * as Yup from 'yup';
 import {projectManagerList, projectOwnerList, techLeadList, frontEndList, backEndList, testersList} from '../data/MemberData.js';
+import AuthenicationService from './AuthenicationService.js';
 
 class DashboardAddProject extends Component {
     constructor(props){
@@ -9,21 +10,20 @@ class DashboardAddProject extends Component {
         this.state = {
             title: '',
             description: '',
-            projectOwner: [],
+            projectOwner: [''],
             projectManager: [],
-            techLead: [],
-            frontEnd: [],
-            backEnd: [],
-            testers: [],
+            techLead: [''],
+            frontEnd: [''],
+            backEnd: [''],
+            testers: [''],
             priority: '',
             currentStatus: '',
-            creationDate: '',
-            createdBy: '',
+            creationDate: `${new Date()}`,
+            createdBy: `${AuthenicationService.getUsername()}`,
             deadline: ''
         }
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.handleSelectChange = this.handleSelectChange.bind(this);
     }
     
     handleChange(event) {
@@ -31,13 +31,9 @@ class DashboardAddProject extends Component {
             [event.target.name]: Array.from(event.target.selectedOptions, (item) => item.value)
         });
     }
-
-    handleSelectChange(event) {
-        this.setState({[event.target.name]: event.target.value});
-    }
     
-    onSubmit(event) {
-        return;
+    onSubmit(values) {
+        console.log(values);
     }
 
     render() {
@@ -50,32 +46,21 @@ class DashboardAddProject extends Component {
             .min(5, 'Description is too short')
             .required('Enter in a description'),
         });
+        let {title, description, projectOwner, projectManager, techLead, frontEnd, 
+        backEnd, testers, priority, currentStatus, creationDate, createdBy, deadline} = this.state
         return(
             <div className="container">
                 <h1 className="title is-1">Create a new project</h1>
                 <Formik
-                    initialValues={{ 
-                        title: '',
-                        description: '',
-                        projectOwner: [],
-                        projectManager: [],
-                        techLead: [],
-                        frontEnd: [],
-                        backEnd: [],
-                        testers: [],
-                        priority: "medium",
-                        currentStatus: "urgent",
-                        creationDate: '',
-                        createdBy: '',
-                        deadline: ''
-                    }}
+                    initialValues={{title, description, projectOwner, projectManager, techLead, frontEnd, backEnd, testers, priority, currentStatus, creationDate, createdBy, deadline}}
                     validateOnChange={true}
                     validateOnBlur={true}
                     validationSchema={addProjectSchema}
                     enableReinitialize={true}
-                    onSubmit={this.onSubmit}>
+                    onSubmit={this.onSubmit}
+                    onChange={this.handleChange}>
                     {
-                        (props) => <Form className="container" onSubmit={this.onSubmit}>
+                        (props) => <Form className="container">
                             <fieldset className="field">
                                 <label className="label">Title</label>
                                 <Field className="input" type="text" name="title" />
@@ -95,9 +80,7 @@ class DashboardAddProject extends Component {
                                             <Field 
                                                 as="select" 
                                                 name="projectManager" 
-                                                multiple={true} 
-                                                value={this.state.projectManager}
-                                                onChange={this.handleChange}>
+                                                multiple={true}>
                                                     {
                                                         projectManagerList.map(
                                                             (member) =>
@@ -116,8 +99,7 @@ class DashboardAddProject extends Component {
                                                 as="select" 
                                                 name="projectOwner" 
                                                 multiple={true} 
-                                                value={this.state.projectOwner}
-                                                onChange={this.handleChange}>
+                                                >
                                                     {
                                                         projectOwnerList.map(
                                                             (member) =>
@@ -136,8 +118,7 @@ class DashboardAddProject extends Component {
                                                 as="select" 
                                                 name="techLead" 
                                                 multiple={true} 
-                                                value={this.state.techLead}
-                                                onChange={this.handleChange}>
+                                                >
                                                     {
                                                         techLeadList.map(
                                                             (member) =>
@@ -156,8 +137,7 @@ class DashboardAddProject extends Component {
                                                 as="select" 
                                                 name="frontEnd" 
                                                 multiple={true} 
-                                                value={this.state.frontEnd}
-                                                onChange={this.handleChange}>
+                                                >
                                                     {
                                                         frontEndList.map(
                                                             (member) =>
@@ -176,8 +156,7 @@ class DashboardAddProject extends Component {
                                                 as="select" 
                                                 name="backEnd" 
                                                 multiple={true} 
-                                                value={this.state.backEnd}
-                                                onChange={this.handleChange}>
+                                                >
                                                     {
                                                         backEndList.map(
                                                             (member) =>
@@ -195,8 +174,7 @@ class DashboardAddProject extends Component {
                                             <Field as="select" 
                                                 name="testers" 
                                                 multiple={true} 
-                                                value={this.state.testers}
-                                                onChange={this.handleChange}>
+                                                >
                                                     {
                                                         testersList.map(
                                                             (member) =>
@@ -219,11 +197,15 @@ class DashboardAddProject extends Component {
                                 <fieldset className="field level-item">
                                     <div className="container">
                                         <label className="label">Status</label>
-                                        <Field className="select" as="select" name="status" value={this.state.currentStatus} onChange={this.handleSelectChange}>
+                                        <Field 
+                                            className="select" 
+                                            as="select" 
+                                            name="currentStatus"
+                                        >
                                             <option value="Planning">Planning</option>
                                             <option value="Analysis">Analysis</option>
                                             <option value="Design">Design</option>
-                                            <option value="Implementation">Implementation</option>
+                                            <option name="Implementation">Implementation</option>
                                             <option value="Design">Design</option>
                                             <option value="Testing/Intergration">Testing/Intergration</option>
                                             <option value="Maintenance">Maintenance</option>
@@ -233,12 +215,16 @@ class DashboardAddProject extends Component {
                                 <fieldset className="field level-item">
                                     <div className="container">
                                         <label className="label">Priority</label>
-                                        <Field className="select" as="select" name="status" value={this.state.priority} onChange={this.handleSelectChange}>
-                                            <option value="longTerm">Long Term</option>
-                                            <option value="low">Low Priority</option>
-                                            <option value="medium">Medium Priority</option>
-                                            <option value="high">High Priority</option>
-                                            <option value="urgent">Urgent Priority</option>
+                                        <Field 
+                                            className="select" 
+                                            as="select" 
+                                            name="priority" 
+                                        >
+                                            <option value="Long Term">Long Term</option>
+                                            <option value="Low Priority">Low Priority</option>
+                                            <option value="Medium Priority">Medium Priority</option>
+                                            <option value="High Priority">High Priority</option>
+                                            <option value="Urgent Priority">Urgent Priority</option>
                                         </Field>
                                     </div>
                                 </fieldset>
