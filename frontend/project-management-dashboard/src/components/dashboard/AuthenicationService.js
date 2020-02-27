@@ -18,16 +18,18 @@ class AuthenicationService {
     }
 
     executeJwtAuthenticationService(loginData) {
-        return axios.post(`${API_URI}/login`, loginData);
+        return axios.post(`${API_URI}/login`, loginData, {
+            responseType: 'json'
+        });
     }
 
     registerSuccessfulLoginForJwt(username, token) {
         cookies.set('authenticatedUser', username);
-        this.setupAxiosInterceptors(this.createJwtToken(token));
+        this.setupAxiosInterceptors(this.createJwtToken(token.headers.authorization));
     }
 
     createJwtToken(token) {
-        return 'Bearer ' + token;
+        return token;
     }
 
     jwtLogout() {

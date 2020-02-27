@@ -3,6 +3,7 @@ import {Formik, ErrorMessage, Form, Field} from 'formik';
 import * as Yup from 'yup';
 import {projectManagerList, projectOwnerList, techLeadList, frontEndList, backEndList, testersList} from '../data/MemberData.js';
 import AuthenicationService from './AuthenicationService.js';
+import DashboardDataService from '../../api/dashboard/DashboardDataService.js';
 
 class DashboardAddProject extends Component {
     constructor(props){
@@ -33,7 +34,10 @@ class DashboardAddProject extends Component {
     }
     
     onSubmit(values) {
+        let username = AuthenicationService.getUsername();
         console.log(values);
+        DashboardDataService.addProject(username, values) 
+        this.props.history.push('/dashboard');
     }
 
     render() {

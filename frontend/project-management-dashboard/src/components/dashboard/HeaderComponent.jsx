@@ -32,7 +32,7 @@ class HeaderComponent extends Component {
                         {
                             isLoggedIn && <div className="navbar-end">
                                 <div className="navbar-item has-dropdown is-hoverable">
-                                    <a href="!#" className="navbar-link">More</a>
+                                    <a href="!#" className="navbar-link">Profile</a>
                                     <div className="navbar-dropdown">
                                         <div className="navbar-item">
                                             <Link to="/logout" onClick={AuthenicationService.jwtLogout}>Logout</Link>

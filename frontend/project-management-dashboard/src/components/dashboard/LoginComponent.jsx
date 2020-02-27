@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import AuthenicationService from "./AuthenicationService.js";
 import {Formik, ErrorMessage, Form, Field} from 'formik';
+import {Route} from 'react-router-dom';
 
 class LoginComponent extends Component {
     constructor(props) {
@@ -16,6 +17,12 @@ class LoginComponent extends Component {
         this.closeNotification = this.closeNotification.bind(this);
     }
 
+    componentDidMount() {
+        if (AuthenicationService.isLoggedIn) {
+            return <Route {...this.props} />
+        }
+    }
+
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value });
     }
@@ -23,7 +30,7 @@ class LoginComponent extends Component {
     handleSubmit(values) {
         AuthenicationService.executeJwtAuthenticationService(values)
             .then((response) => {
-                AuthenicationService.registerSuccessfulLoginForJwt(values.username, response.data.token);
+                AuthenicationService.registerSuccessfulLoginForJwt(values.username, response);
                 this.setState({loginSuccess: true});
                 this.setState({loginFailed:false});
                 this.props.history.push(`/users/${values.username}/dashboard`);
