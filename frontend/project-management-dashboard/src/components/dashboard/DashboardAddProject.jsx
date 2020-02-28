@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Formik, ErrorMessage, Form, Field} from 'formik';
 import * as Yup from 'yup';
-import {projectManagerList, projectOwnerList, techLeadList, frontEndList, backEndList, testersList} from '../data/MemberData.js';
 import AuthenicationService from './AuthenicationService.js';
 import DashboardDataService from '../../api/dashboard/DashboardDataService.js';
 
@@ -11,12 +10,6 @@ class DashboardAddProject extends Component {
         this.state = {
             title: '',
             description: '',
-            projectOwner: [''],
-            projectManager: [],
-            techLead: [''],
-            frontEnd: [''],
-            backEnd: [''],
-            testers: [''],
             priority: '',
             currentStatus: '',
             creationDate: `${new Date()}`,
@@ -50,13 +43,12 @@ class DashboardAddProject extends Component {
             .min(5, 'Description is too short')
             .required('Enter in a description'),
         });
-        let {title, description, projectOwner, projectManager, techLead, frontEnd, 
-        backEnd, testers, priority, currentStatus, creationDate, createdBy, deadline} = this.state
+        let {title, description, priority, currentStatus, creationDate, createdBy, deadline} = this.state
         return(
             <div className="container">
                 <h1 className="title is-1">Create a new project</h1>
                 <Formik
-                    initialValues={{title, description, projectOwner, projectManager, techLead, frontEnd, backEnd, testers, priority, currentStatus, creationDate, createdBy, deadline}}
+                    initialValues={{title, description, priority, currentStatus, creationDate, createdBy, deadline}}
                     validateOnChange={true}
                     validateOnBlur={true}
                     validationSchema={addProjectSchema}
@@ -75,7 +67,7 @@ class DashboardAddProject extends Component {
                                 <Field className="textarea" as="textarea" name="description" />
                                 <ErrorMessage name="description" component="p" className="help is-danger"/>
                             </fieldset>
-                            <label className="label">Team Assignment</label>
+                            {/* <label className="label">Team Assignment</label>
                             <div className="level">
                                 <fieldset className="field level-item has-text-centered">
                                     <div>
@@ -190,7 +182,7 @@ class DashboardAddProject extends Component {
                                     </div>
                                 </fieldset>
                                 <div className="level-item"></div>
-                            </div>
+                            </div> */}
                             <div className="level">
                                 <fieldset className="field level-item">
                                     <div className="container">

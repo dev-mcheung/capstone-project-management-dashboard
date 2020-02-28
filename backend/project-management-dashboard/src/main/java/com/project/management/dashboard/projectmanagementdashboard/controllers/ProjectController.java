@@ -18,6 +18,7 @@ public class ProjectController {
     @PostMapping(path="/users/{username}/dashboard/projects")
     public ResponseEntity<Void> proccessAddProject(@RequestBody Project project,
                                                    @PathVariable String username) {
+
         Project addProject = projectRepository.save(project);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
