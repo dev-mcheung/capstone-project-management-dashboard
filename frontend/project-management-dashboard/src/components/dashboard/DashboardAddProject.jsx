@@ -30,7 +30,7 @@ class DashboardAddProject extends Component {
         let username = AuthenicationService.getUsername();
         console.log(values);
         DashboardDataService.addProject(username, values) 
-        this.props.history.push('/dashboard');
+        this.props.history.push(`/users/${AuthenicationService.getUsername()}/dashboard`);
     }
 
     render() {
