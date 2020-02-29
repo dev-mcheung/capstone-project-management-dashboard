@@ -18,13 +18,13 @@ class AuthenicationService {
     }
 
     executeJwtAuthenticationService(loginData) {
-        return axios.post(`${API_URI}/login`, loginData, {
-            responseType: 'json'
-        });
+        return axios.post(`${API_URI}/login`, loginData);
     }
 
     registerSuccessfulLoginForJwt(username, token) {
         cookies.set('authenticatedUser', username);
+        let parseToken = token.headers.authorization.replace("Bearer", "");
+        cookies.set('parse_token', String(parseToken));
         this.setupAxiosInterceptors(this.createJwtToken(token.headers.authorization));
     }
 
@@ -33,14 +33,15 @@ class AuthenicationService {
     }
 
     jwtLogout() {
-        cookies.remove("authenticatedUser", {path: '/*'});
+        cookies.remove("authenticatedUser", {path: '/'});
     }
     
     isLoggedIn() {
         if(cookies.get('authenticatedUser')=== undefined) {
-            return false
+            return false;
+        } else {
+            return true;
         }
-        return true;
     }
     
     getUsername() {

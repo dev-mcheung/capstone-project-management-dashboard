@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import DashboardNavComponent from './DashboardNavComponent';
-import AuthenicationService from './AuthenicationService';
 import DashboardDataService from '../../api/dashboard/DashboardDataService';
 
 class DashboardComponent extends Component {
@@ -17,7 +16,6 @@ class DashboardComponent extends Component {
     }
 
     refreshProjects() {
-        let username = AuthenicationService.getUsername;
         DashboardDataService.retrieveAllProjects()
             .then(
                 response => {
