@@ -37,11 +37,35 @@ class DashboardComponent extends Component {
                             <tr className="tr">
                                 <th className="th">Title</th>
                                 <th className="th">Description</th>
-                                <th className="th">Deadline</th>
                                 <th className="th">Status</th>
+                                <th className="th">Deadline</th>
                                 <th className="th">Priority</th>
                             </tr>
                         </thead>
+                        <tbody className="tbody">
+                            {
+                                this.state.projects.map(
+                                    project =>
+                                        <tr className="tr" key={project.project_id}>
+                                            <td className="td">
+                                                {project.title}
+                                            </td>
+                                            <td className="td">
+                                                {project.description}
+                                            </td>
+                                            <td className="td">
+                                                {project.currentStatus}
+                                            </td>
+                                            <td className="td">
+                                                {project.deadline}
+                                            </td>
+                                            <td className="td">
+                                                {project.priority}
+                                            </td>
+                                        </tr>
+                                )
+                            }
+                        </tbody>
                     </table>
                 </div>
             </>

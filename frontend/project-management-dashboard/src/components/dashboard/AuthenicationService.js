@@ -33,7 +33,7 @@ class AuthenicationService {
     }
 
     jwtLogout() {
-        cookies.remove("authenticatedUser", {path: '/'});
+        cookies.remove("authenticatedUser", {path: '/*'});
     }
     
     isLoggedIn() {
