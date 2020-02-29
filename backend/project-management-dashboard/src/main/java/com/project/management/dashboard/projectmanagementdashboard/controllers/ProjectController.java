@@ -8,12 +8,18 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000", allowCredentials= "true", allowedHeaders = "*")
 public class ProjectController {
     @Autowired
     private ProjectRepository projectRepository;
+
+    @GetMapping(path="/api/get/projects")
+    public List<Project> getAllProjects() {
+        return projectRepository.findAll();
+    }
 
     @PostMapping(path="/users/{username}/dashboard/projects")
     public ResponseEntity<Void> proccessAddProject(@RequestBody Project project,
