@@ -3,6 +3,7 @@ import {API_URI} from '../../VariableProperties.js';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
+axios.defaults.withCredentials = true;
 
 class AuthenicationService {
 
@@ -23,8 +24,7 @@ class AuthenicationService {
 
     registerSuccessfulLoginForJwt(username, token) {
         cookies.set('authenticatedUser', username);
-        let parseToken = token.headers.authorization.replace("Bearer", "");
-        cookies.set('parse_token', String(parseToken));
+        console.log(token)
         this.setupAxiosInterceptors(this.createJwtToken(token.headers.authorization));
     }
 

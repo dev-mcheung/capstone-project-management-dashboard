@@ -17,6 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import javax.crypto.SecretKey;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -64,6 +65,10 @@ public class JWTAuthenicationFilter extends UsernamePasswordAuthenticationFilter
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(key)
                 .compact();
-        res.setHeader(HEADER_STRING, TOKEN_PREFIX + token);
+        res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
+        Cookie cookie = new Cookie("session_token", token);
+        cookie.setPath("/");
+        cookie.setMaxAge(-1);
+        res.addCookie(cookie);
     }
 }
