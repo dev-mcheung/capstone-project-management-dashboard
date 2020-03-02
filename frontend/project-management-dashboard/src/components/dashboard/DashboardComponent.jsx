@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import DashboardNavComponent from './DashboardNavComponent';
 import DashboardDataService from '../../api/dashboard/DashboardDataService';
+import moment from 'moment';
 
 class DashboardComponent extends Component {
     constructor(props) {
@@ -55,7 +56,7 @@ class DashboardComponent extends Component {
                                                 {project.currentStatus}
                                             </td>
                                             <td className="td">
-                                                {project.deadline}
+                                                {moment(project.deadline).format("MM/DD/YYYY")}
                                             </td>
                                             <td className="td">
                                                 {project.priority}
