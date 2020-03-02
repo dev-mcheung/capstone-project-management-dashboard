@@ -4,6 +4,7 @@ import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 axios.defaults.withCredentials = true;
+axios.defaults.headers.common['Authorization'] = `Bearer ${cookies.get("session_token")}`; 
 
 class AuthenicationService {
 
@@ -24,20 +25,15 @@ class AuthenicationService {
 
     registerSuccessfulLoginForJwt(username, token) {
         cookies.set('authenticatedUser', username);
-        console.log(token)
-        this.setupAxiosInterceptors(this.createJwtToken(token.headers.authorization));
-    }
-
-    createJwtToken(token) {
-        return token;
     }
 
     jwtLogout() {
         cookies.remove("authenticatedUser", {path: '/'});
+        cookies.remove("session_token", {path: '/'});
     }
     
     isLoggedIn() {
-        if(cookies.get('authenticatedUser')=== undefined) {
+        if (cookies.get("session_token") === undefined) {
             return false;
         } else {
             return true;

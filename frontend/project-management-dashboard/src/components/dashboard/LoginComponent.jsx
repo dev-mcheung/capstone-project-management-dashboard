@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import AuthenicationService from "./AuthenicationService.js";
 import {Formik, ErrorMessage, Form, Field} from 'formik';
-import {Route} from 'react-router-dom';
+import { Redirect } from "react-router-dom";
+// import {Route} from 'react-router-dom';
 
 class LoginComponent extends Component {
     constructor(props) {
@@ -11,6 +12,7 @@ class LoginComponent extends Component {
             password: "",
             loginFailed: false,
             loginSuccess: false,
+            redirect: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -18,8 +20,8 @@ class LoginComponent extends Component {
     }
 
     componentDidMount() {
-        if (AuthenicationService.isLoggedIn) {
-            return <Route {...this.props} />
+        if (AuthenicationService.isLoggedIn() === true) {
+            this.setState({redirect: true});
         }
     }
 
@@ -30,7 +32,7 @@ class LoginComponent extends Component {
     handleSubmit(values) {
         AuthenicationService.executeJwtAuthenticationService(values)
             .then((response) => {
-                AuthenicationService.registerSuccessfulLoginForJwt(values.username, response);
+                AuthenicationService.registerSuccessfulLoginForJwt(values.username);
                 this.setState({loginSuccess: true});
                 this.setState({loginFailed:false});
                 this.props.history.push(`/users/${values.username}/dashboard`);
@@ -48,6 +50,9 @@ class LoginComponent extends Component {
     render() {
         let {username, password} = this.state;
         return (
+            this.state.redirect
+            ? <Redirect to={`/users/${AuthenicationService.getUsername()}/dashboard`}/>
+            :
             <Formik
                 initialValues={{username, password}}
                 validateOnBlur={true}
