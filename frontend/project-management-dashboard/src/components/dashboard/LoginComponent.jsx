@@ -25,6 +25,10 @@ class LoginComponent extends Component {
         }
     }
 
+    componentWillUnmount() {
+        this.setState({redirect: false});
+    }
+
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value });
     }
@@ -35,6 +39,7 @@ class LoginComponent extends Component {
                 AuthenicationService.registerSuccessfulLoginForJwt(values.username);
                 this.setState({loginSuccess: true});
                 this.setState({loginFailed:false});
+                window.location.reload();
                 this.props.history.push(`/users/${values.username}/dashboard`);
             })
             .catch ( () => {
@@ -111,7 +116,18 @@ class LoginComponent extends Component {
                                                     </button>
                                                 </p>
                                             </div>
-                                            {this.state.loginFailed && <div className="notification is-centered is-danger"><button onClick={this.closeNotification} className="delete"></button>Invalid Username or Password</div>}
+                                            {this.state.loginSuccess && 
+                                                <div className="notification is centered is-success">
+                                                    Login Successful!
+                                                </div>
+                                            }
+                                            {this.state.loginFailed && 
+                                                <div className="notification is-centered is-danger">
+                                                    <button onClick={this.closeNotification} className="delete">
+                                                    </button>
+                                                    Invalid Username or Password
+                                                </div>
+                                            }
                                         </Form>
                                     </div>
                                 </div>

@@ -1,10 +1,8 @@
 import axios from "axios";
-import {API_URI} from '../../VariableProperties.js';
-import Cookies from 'universal-cookie';
+import {API_URI, cookies} from '../../VariableProperties.js';
 
-const cookies = new Cookies();
 axios.defaults.withCredentials = true;
-axios.defaults.headers.common['Authorization'] = `Bearer ${cookies.get("session_token")}`; 
+axios.defaults.headers.common['Authorization'] = `Bearer ${cookies.get("session_token")}`;
 
 class AuthenicationService {
 
@@ -23,7 +21,7 @@ class AuthenicationService {
         return axios.post(`${API_URI}/login`, loginData);
     }
 
-    registerSuccessfulLoginForJwt(username, token) {
+    registerSuccessfulLoginForJwt(username) {
         cookies.set('authenticatedUser', username);
     }
 
