@@ -36,7 +36,7 @@ class LoginComponent extends Component {
     handleSubmit(values) {
         AuthenicationService.executeJwtAuthenticationService(values)
             .then((response) => {
-                AuthenicationService.registerSuccessfulLoginForJwt(values.username);
+                // AuthenicationService.registerSuccessfulLoginForJwt(values.username);
                 this.setState({loginSuccess: true});
                 this.setState({loginFailed:false});
                 window.location.reload();

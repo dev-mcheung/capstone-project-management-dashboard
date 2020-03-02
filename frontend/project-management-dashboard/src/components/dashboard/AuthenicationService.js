@@ -20,11 +20,7 @@ class AuthenicationService {
     executeJwtAuthenticationService(loginData) {
         return axios.post(`${API_URI}/login`, loginData);
     }
-
-    registerSuccessfulLoginForJwt(username) {
-        cookies.set('authenticatedUser', username);
-    }
-
+    
     jwtLogout() {
         cookies.remove("authenticatedUser", {path: '/'});
         cookies.remove("session_token", {path: '/'});

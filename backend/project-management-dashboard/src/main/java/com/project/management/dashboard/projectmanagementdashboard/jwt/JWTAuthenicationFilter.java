@@ -74,5 +74,7 @@ public class JWTAuthenicationFilter extends UsernamePasswordAuthenticationFilter
                 .compact();
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
         res.addCookie(setCookie("session_token", token, "/", -1));
+        res.addCookie(setCookie("authenticatedUser", ((User) auth.getPrincipal()).getUsername(),
+                "/", -1));
     }
 }
