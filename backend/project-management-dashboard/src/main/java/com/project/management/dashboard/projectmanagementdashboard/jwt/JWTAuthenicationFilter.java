@@ -34,6 +34,13 @@ public class JWTAuthenicationFilter extends UsernamePasswordAuthenticationFilter
         this.authenticationManager = authenticationManager;
     }
 
+    public Cookie setCookie(String name, String value, String path, int age) {
+        Cookie cookie = new Cookie(name, value);
+        cookie.setPath(path);
+        cookie.setMaxAge(age);
+        return cookie;
+    }
+
     @Override
     public Authentication attemptAuthentication(HttpServletRequest req,
                                               HttpServletResponse res) throws AuthenticationException {
@@ -66,9 +73,6 @@ public class JWTAuthenicationFilter extends UsernamePasswordAuthenticationFilter
                 .signWith(key)
                 .compact();
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
-        Cookie cookie = new Cookie("session_token", token);
-        cookie.setPath("/");
-        cookie.setMaxAge(-1);
-        res.addCookie(cookie);
+        res.addCookie(setCookie("session_token", token, "/", -1));
     }
 }
