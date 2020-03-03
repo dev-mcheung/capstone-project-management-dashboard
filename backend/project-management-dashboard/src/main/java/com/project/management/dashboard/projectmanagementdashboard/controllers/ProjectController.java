@@ -22,7 +22,8 @@ public class ProjectController {
     }
 
     @DeleteMapping(path="/users/{username}/dashboard/projects/{id}")
-    public ResponseEntity<Void> processDeleteProject(@PathVariable long id) {
+    public ResponseEntity<Void> processDeleteProject(@PathVariable String username,
+                                                     @PathVariable long id) {
         projectRepository.deleteById(id);
 
         return ResponseEntity.noContent().build();
