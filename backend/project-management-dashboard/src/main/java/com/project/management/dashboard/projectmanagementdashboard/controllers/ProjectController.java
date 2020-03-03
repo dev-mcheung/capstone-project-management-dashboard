@@ -21,6 +21,12 @@ public class ProjectController {
         return projectRepository.findAll();
     }
 
+    @GetMapping(path="/users/{username}/dashboard/projects/{id}")
+    public Project getUserProject(@PathVariable String username,
+                                        @PathVariable long id) {
+        return projectRepository.findById(id).get();
+    }
+
     @DeleteMapping(path="/users/{username}/dashboard/projects/{id}")
     public ResponseEntity<Void> processDeleteProject(@PathVariable String username,
                                                      @PathVariable long id) {

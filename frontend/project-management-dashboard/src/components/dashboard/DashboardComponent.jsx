@@ -2,17 +2,19 @@ import React, {Component} from 'react';
 import DashboardNavComponent from './DashboardNavComponent';
 import DashboardDataService from '../../api/dashboard/DashboardDataService';
 import moment from 'moment';
-// import {DeleteConfirmation} from './DeleteConfirmation.js';
+import AuthenicationService from './AuthenicationService';
 
 class DashboardComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
             projects: [],
-            showDeletePrompt: false
+            showDeletePrompt: false,
+            trackProjectId: 0
         }
         this.refreshProjects = this.refreshProjects.bind(this);
         this.handleOnClick = this.handleOnClick.bind(this);
+        this.deleteProject = this.deleteProject.bind(this);
     }
 
     componentDidMount() {
@@ -29,10 +31,22 @@ class DashboardComponent extends Component {
             )
     }
 
-    handleOnClick(event) {
+    deleteProject(id) {
+        let username = AuthenicationService.getUsername();
+        DashboardDataService.deleteProject(username, id)
+            .then (
+                () => {
+                    this.setState({showDeletePrompt: false});
+                    this.refreshProjects();
+                }
+            )
+    }
+
+    handleOnClick(id) {
         if(this.state.showDeletePrompt) {
             return this.setState({showDeletePrompt: false});
         } else {
+            this.setState({trackProjectId: id});
             return this.setState({showDeletePrompt: true});
         }
     }
@@ -74,7 +88,7 @@ class DashboardComponent extends Component {
                                                 {project.priority}
                                             </td>
                                             <td className="td">
-                                                <button className="button is-danger is-small" type="button" onClick={this.handleOnClick}>
+                                                <button className="button is-danger is-small" type="button" onClick={() => this.handleOnClick(project.project_id)}>
                                                     Delete
                                                 </button>
                                             </td>
@@ -92,7 +106,7 @@ class DashboardComponent extends Component {
                                         <div className="message-header">Delete the current project?</div>
                                         <div className="message-body level">
                                             <section className="level-item">
-                                                <button className="button is-success" onClick={this.handleOnClick}>Yes</button>
+                                                <button className="button is-success" onClick={() => this.deleteProject(this.state.trackProjectId)}>Yes</button>
                                             </section>
                                             <section className="level-item">
                                                 <button className="button is-danger" onClick={this.handleOnClick}>Cancel</button>

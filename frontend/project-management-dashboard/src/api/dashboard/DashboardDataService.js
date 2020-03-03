@@ -9,6 +9,10 @@ class DashboardDataService {
     retrieveAllProjects() {
         return axios.get(`${API_URI}/api/projects`);
     }
+
+    deleteProject(name, id) {
+        return axios.delete(`${API_URI}/users/${name}/dashboard/projects/${id}`);
+    }
 }
 
 export default new DashboardDataService();
