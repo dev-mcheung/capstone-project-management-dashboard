@@ -3,7 +3,6 @@ import React from 'react';
 import './App.css';
 import DashboardApp from './components/dashboard/DashboardApp.jsx';
 import 'bulma/css/bulma.min.css';
-import 'bulma-calendar/dist/css/bulma-calendar.min.css';
 import '@fortawesome/fontawesome-free/js/all.js';
 
 function App() {
