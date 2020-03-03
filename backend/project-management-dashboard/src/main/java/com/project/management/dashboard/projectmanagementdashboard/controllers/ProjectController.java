@@ -16,9 +16,16 @@ public class ProjectController {
     @Autowired
     private ProjectRepository projectRepository;
 
-    @GetMapping(path="/api/get/projects")
+    @GetMapping(path="/api/projects")
     public List<Project> getAllProjects() {
         return projectRepository.findAll();
+    }
+
+    @DeleteMapping(path="/users/{username}/dashboard/projects/{id}")
+    public ResponseEntity<Void> processDeleteProject(@PathVariable long id) {
+        projectRepository.deleteById(id);
+
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping(path="/users/{username}/dashboard/projects")

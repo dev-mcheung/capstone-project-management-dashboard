@@ -7,7 +7,7 @@ class DashboardDataService {
     }
 
     retrieveAllProjects() {
-        return axios.get(`${API_URI}/api/get/projects`);
+        return axios.get(`${API_URI}/api/projects`);
     }
 }
 
