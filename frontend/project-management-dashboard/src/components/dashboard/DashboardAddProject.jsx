@@ -28,8 +28,7 @@ class DashboardAddProject extends Component {
     
     onSubmit(values) {
         let username = AuthenicationService.getUsername();
-        console.log(values);
-        DashboardDataService.addProject(username, values) 
+        DashboardDataService.addProject(username, values);
         this.props.history.push(`/users/${AuthenicationService.getUsername()}/dashboard`);
     }
 
