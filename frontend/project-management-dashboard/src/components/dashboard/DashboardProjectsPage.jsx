@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import AuthenicationService from "./AuthenicationService.js";
 import DashboardDataService from "../../api/dashboard/DashboardDataService.js";
 import moment from "moment";
-import { DatePickerField } from "./DatePicker.jsx";
+import { DatePickerField } from "../other/DatePicker.jsx";
 
 class DashboardProjectsPage extends Component {
   constructor(props) {
