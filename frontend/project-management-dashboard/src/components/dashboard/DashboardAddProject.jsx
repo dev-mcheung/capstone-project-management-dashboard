@@ -247,9 +247,22 @@ class DashboardAddProject extends Component {
                 </fieldset>
                 <div className="level-item"></div>
               </div>
-              <button className="button is-success" type="submit">
-                Add
-              </button>
+              <div className="navbar is-transparent">
+                <div className="buttons navbar-menu">
+                  <div className="navbar-end">
+                    <button className="button is-success" type="submit">
+                      Add
+                    </button>
+                    <button
+                      className="button is-danger"
+                      type="button"
+                      onClick={() => this.props.history.goBack()}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
             </Form>
           )}
         </Formik>

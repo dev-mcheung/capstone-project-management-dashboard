@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import AuthenicationService from "./AuthenicationService.js";
 
 class DashboardNavComponent extends Component {
   render() {
-    const getUsername = AuthenicationService.getUsername();
     return (
       <div className="container">
         <div className="level">

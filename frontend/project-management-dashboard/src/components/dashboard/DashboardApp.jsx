@@ -40,3 +40,5 @@ export class DashboardApp extends Component {
     );
   }
 }
+
+export default DashboardApp;
