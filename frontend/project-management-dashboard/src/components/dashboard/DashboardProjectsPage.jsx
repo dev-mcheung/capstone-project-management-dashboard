@@ -3,8 +3,10 @@ import { Formik, ErrorMessage, Form, Field } from "formik";
 import * as Yup from "yup";
 import AuthenicationService from "./AuthenicationService.js";
 import DashboardDataService from "../../api/dashboard/DashboardDataService.js";
+import moment from "moment";
+import { DatePickerField } from "./DatePicker.jsx";
 
-class DashboardAddProject extends Component {
+class DashboardProjectsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,9 +14,9 @@ class DashboardAddProject extends Component {
       description: "",
       priority: "",
       currentStatus: "",
-      creationDate: `${new Date()}`,
+      creationDate: moment(new Date()).format("MM/DD/YYYY"),
       createdBy: `${AuthenicationService.getUsername()}`,
-      deadline: ""
+      deadline: new Date()
     };
     this.handleChange = this.handleChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -29,10 +31,30 @@ class DashboardAddProject extends Component {
     });
   }
 
+  componentDidMount() {
+    if (this.props.match.params.id === "add") {
+      return;
+    } else {
+      let id = this.props.match.params.id;
+      let username = AuthenicationService.getUsername();
+      DashboardDataService.retrieveProjectById(username, id).then(response =>
+        this.setState({
+          title: response.data.title,
+          description: response.data.description,
+          priority: response.data.priority,
+          currentStatus: response.data.currentStatus,
+          creationDate: moment(response.data.creationDate).format("MM/DD/YYYY"),
+          createdBy: response.data.createdBy,
+          deadline: moment(response.data.deadline).format("MM/DD/YYYY")
+        })
+      );
+    }
+  }
+
   onSubmit(values) {
     let username = AuthenicationService.getUsername();
     DashboardDataService.addProject(username, values);
-    this.history.goBack();
+    this.props.history.goBack();
   }
 
   render() {
@@ -214,17 +236,18 @@ class DashboardAddProject extends Component {
                 <fieldset className="field level-item">
                   <div className="container">
                     <label className="label">Deadline</label>
-                    <Field className="calendar" type="date" name="deadline" />
+                    {/* <Field className="calendar" type="date" name="deadline" /> */}
+                    <DatePickerField name="deadline" />
                   </div>
                 </fieldset>
                 <fieldset className="field level-item">
                   <div className="container">
                     <label className="label">Status</label>
                     <Field className="select" as="select" name="currentStatus">
-                      <option value="Planning">Planning</option>
+                      <option defaultValue="Planning">Planning</option>
                       <option value="Analysis">Analysis</option>
                       <option value="Design">Design</option>
-                      <option name="Implementation">Implementation</option>
+                      <option value="Implementation">Implementation</option>
                       <option value="Design">Design</option>
                       <option value="Testing/Intergration">
                         Testing/Intergration
@@ -239,7 +262,9 @@ class DashboardAddProject extends Component {
                     <Field className="select" as="select" name="priority">
                       <option value="Long Term">Long Term</option>
                       <option value="Low Priority">Low Priority</option>
-                      <option value="Medium Priority">Medium Priority</option>
+                      <option defaultValue="Medium Priority">
+                        Medium Priority
+                      </option>
                       <option value="High Priority">High Priority</option>
                       <option value="Urgent Priority">Urgent Priority</option>
                     </Field>
@@ -271,4 +296,4 @@ class DashboardAddProject extends Component {
   }
 }
 
-export default DashboardAddProject;
+export default DashboardProjectsPage;

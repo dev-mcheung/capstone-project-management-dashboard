@@ -49,6 +49,7 @@ public class ProjectController {
         projectUpdated.setDeadline(project.getDeadline());
         projectUpdated.setCurrentStatus(project.getCurrentStatus());
         projectUpdated.setPriority(project.getPriority());
+        projectUpdated.setCreationDate(project.getCreationDate());
 
         projectRepository.save(projectUpdated);
 

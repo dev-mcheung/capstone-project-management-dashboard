@@ -36,6 +36,9 @@ public class Project {
 //    @Column(name="tester", nullable = false)
 //    private List testers;
 
+    @Column(name="creation_date", nullable = false)
+    private Date creationDate;
+
     @Column(name="deadline", nullable = false)
     private Date deadline;
 
@@ -48,10 +51,11 @@ public class Project {
     @Column(name="priority", nullable = false)
     private String priority;
 
-    public Project(long project_id, String title, String description, Date deadline, String currentStatus, String createdBy, String priority) {
+    public Project(long project_id, String title, String description, Date creationDate, Date deadline, String currentStatus, String createdBy, String priority) {
         this.project_id = project_id;
         this.title = title;
         this.description = description;
+        this.creationDate = creationDate;
         this.deadline = deadline;
         this.currentStatus = currentStatus;
         this.createdBy = createdBy;
@@ -82,6 +86,14 @@ public class Project {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
     public Date getDeadline() {

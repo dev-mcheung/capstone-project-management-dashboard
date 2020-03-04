@@ -7,7 +7,7 @@ import HeaderComponent from "./HeaderComponent.jsx";
 import LogoutComponent from "./LogoutComponent.jsx";
 import ManageUserComponent from "../administration/addUser.jsx";
 import ErrorRoute from "./ErrorRoute.jsx";
-import DashboardAddProject from "./DashboardAddProject.jsx";
+import DashboardProjectsPage from "./DashboardProjectsPage.jsx";
 import AuthenicatedRoute from "./AuthenicatedRoute.jsx";
 
 export class DashboardApp extends Component {
@@ -28,9 +28,14 @@ export class DashboardApp extends Component {
             component={ManageUserComponent}
           />
           <AuthenicatedRoute
-            path="/dashboard/projects/add"
+            path="/dashboard/projects/:id"
             exact
-            component={DashboardAddProject}
+            component={DashboardProjectsPage}
+          />
+          <AuthenicatedRoute
+            path="/dashboard/projects/edit/:id"
+            exact
+            component={DashboardProjectsPage}
           />
           <AuthenicatedRoute path="/logout" component={LogoutComponent} />
           <Route component={ErrorRoute} />

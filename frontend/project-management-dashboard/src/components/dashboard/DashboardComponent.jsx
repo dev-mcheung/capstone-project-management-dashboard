@@ -37,7 +37,7 @@ class DashboardComponent extends Component {
   }
 
   handleEditButton(id) {
-    this.history.push(`/projects/edit/${id}`);
+    this.props.history.push(`dashboard/projects/edit/${id}`);
   }
 
   handleOnClick(id) {

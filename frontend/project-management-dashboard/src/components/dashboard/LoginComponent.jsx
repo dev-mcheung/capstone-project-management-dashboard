@@ -39,7 +39,7 @@ class LoginComponent extends Component {
         this.setState({ loginSuccess: true });
         this.setState({ loginFailed: false });
         window.location.reload();
-        this.props.history.push(`/dashboard`);
+        this.history.push(`/dashboard`);
       })
       .catch(() => {
         this.setState({ loginFailed: true });
