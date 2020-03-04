@@ -23,7 +23,6 @@ class DashboardComponent extends Component {
 
   refreshProjects() {
     DashboardDataService.retrieveAllProjects().then(response => {
-      console.log(response);
       this.setState({ projects: response.data });
     });
   }

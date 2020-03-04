@@ -14,9 +14,10 @@ class DashboardProjectsPage extends Component {
       description: "",
       priority: "",
       currentStatus: "",
-      creationDate: moment(new Date()).format("MM/DD/YYYY"),
+      creationDate: new Date(),
       createdBy: `${AuthenicationService.getUsername()}`,
-      deadline: new Date()
+      deadline: new Date(),
+      clickAdd: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -33,6 +34,7 @@ class DashboardProjectsPage extends Component {
 
   componentDidMount() {
     if (this.props.match.params.id === "add") {
+      this.setState({ clickAdd: true });
       return;
     } else {
       let id = this.props.match.params.id;
@@ -43,18 +45,28 @@ class DashboardProjectsPage extends Component {
           description: response.data.description,
           priority: response.data.priority,
           currentStatus: response.data.currentStatus,
-          creationDate: moment(response.data.creationDate).format("MM/DD/YYYY"),
+          creationDate: response.data.creationDate,
           createdBy: response.data.createdBy,
-          deadline: moment(response.data.deadline).format("MM/DD/YYYY")
+          deadline: moment(response.data.deadline).format("MM/DD/YYYY"),
+          clickAdd: false
         })
       );
     }
   }
 
   onSubmit(values) {
-    let username = AuthenicationService.getUsername();
-    DashboardDataService.addProject(username, values);
-    this.props.history.goBack();
+    if (this.props.match.params.id === "add") {
+      let username = AuthenicationService.getUsername();
+      DashboardDataService.addProject(username, values);
+      this.props.history.goBack();
+    } else {
+      console.log(values);
+      let id = this.props.match.params.id;
+      let username = values.createdBy;
+      DashboardDataService.updateProjectById(username, id, values).then(() =>
+        this.props.history.push("/dashboard")
+      );
+    }
   }
 
   render() {
@@ -276,7 +288,7 @@ class DashboardProjectsPage extends Component {
                 <div className="buttons navbar-menu">
                   <div className="navbar-end">
                     <button className="button is-success" type="submit">
-                      Add
+                      {this.state.clickAdd ? "Add" : "Edit"}
                     </button>
                     <button
                       className="button is-danger"
