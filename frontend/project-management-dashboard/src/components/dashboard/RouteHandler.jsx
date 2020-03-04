@@ -10,7 +10,7 @@ import ErrorRoute from './ErrorRoute.jsx';
 import DashboardAddProject from './DashboardAddProject.jsx';
 import AuthenicatedRoute from './AuthenicatedRoute.jsx';
 
-class DashboardApp extends Component {
+class RouteHandler extends Component {
     render() {
         return(
             <Router>
@@ -29,4 +29,4 @@ class DashboardApp extends Component {
     }
 }
 
-export default DashboardApp
+export default RouteHandler

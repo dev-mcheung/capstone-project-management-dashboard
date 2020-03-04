@@ -1,42 +1,41 @@
 import axios from "axios";
-import {API_URI, cookies} from '../../VariableProperties.js';
+import { API_URI, cookies } from "../../VariableProperties.js";
 
 axios.defaults.withCredentials = true;
-axios.defaults.headers.common['Authorization'] = `Bearer ${cookies.get("session_token")}`;
+axios.defaults.headers.common["Authorization"] = `Bearer ${cookies.get(
+  "session_token"
+)}`;
 
 class AuthenicationService {
+  setupAxiosInterceptors(AuthHeader) {
+    axios.interceptors.request.use(config => {
+      if (this.isLoggedIn()) {
+        config.headers.authorization = AuthHeader;
+      }
+      return config;
+    });
+  }
 
-    setupAxiosInterceptors(AuthHeader) {
-        axios.interceptors.request.use(
-            (config) => {
-                if(this.isLoggedIn()) {
-                    config.headers.authorization = AuthHeader;
-                }
-                return config;
-            }
-        )
-    }
+  executeJwtAuthenticationService(loginData) {
+    return axios.post(`${API_URI}/login`, loginData);
+  }
 
-    executeJwtAuthenticationService(loginData) {
-        return axios.post(`${API_URI}/login`, loginData);
+  jwtLogout() {
+    cookies.remove("authenticatedUser", { path: "/" });
+    cookies.remove("session_token", { path: "/" });
+  }
+
+  isLoggedIn() {
+    if (cookies.get("session_token") === undefined) {
+      return false;
+    } else {
+      return true;
     }
-    
-    jwtLogout() {
-        cookies.remove("authenticatedUser", {path: '/'});
-        cookies.remove("session_token", {path: '/'});
-    }
-    
-    isLoggedIn() {
-        if (cookies.get("session_token") === undefined) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-    
-    getUsername() {
-        return cookies.get("authenticatedUser");
-    }
+  }
+
+  getUsername() {
+    return cookies.get("authenticatedUser");
+  }
 }
 
 export default new AuthenicationService();
