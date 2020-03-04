@@ -42,6 +42,10 @@ class DashboardComponent extends Component {
             )
     }
 
+    handleEditButton(id) {
+        this.history.push(`/projects/edit/${id}`);
+    }
+
     handleOnClick(id) {
         if(this.state.showDeletePrompt) {
             return this.setState({showDeletePrompt: false});
@@ -64,6 +68,7 @@ class DashboardComponent extends Component {
                                 <th className="th">Status</th>
                                 <th className="th">Deadline</th>
                                 <th className="th">Priority</th>
+                                <th className="th">Edit</th>
                                 <th className="th">Delete</th>
                             </tr>
                         </thead>
@@ -88,7 +93,18 @@ class DashboardComponent extends Component {
                                                 {project.priority}
                                             </td>
                                             <td className="td">
-                                                <button className="button is-danger is-small" type="button" onClick={() => this.handleOnClick(project.project_id)}>
+                                                <button 
+                                                    className="button is-warning is-small" type="button" 
+                                                    onClick={() => this.handleEditButton(project.project_id)}
+                                                >
+                                                    Edit
+                                                </button>
+                                            </td>
+                                            <td className="td">
+                                                <button 
+                                                    className="button is-danger is-small" type="button" 
+                                                    onClick={() => this.handleOnClick(project.project_id)}
+                                                >
                                                     Delete
                                                 </button>
                                             </td>
@@ -123,4 +139,4 @@ class DashboardComponent extends Component {
     }
 }
 
-export default DashboardComponent
+export default DashboardComponent;
