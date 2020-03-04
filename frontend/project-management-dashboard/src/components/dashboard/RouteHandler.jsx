@@ -16,8 +16,7 @@ class DashboardApp extends Component {
             <Router>
                 <HeaderComponent />
                 <Switch>
-                    <Route path="/" exact component={LoginComponent} />
-                    <Route path="/login" component={LoginComponent} />
+                    <Route path={["/", "/login"]} exact component={LoginComponent} />
                     <AuthenicatedRoute path="/users/:name/dashboard" exact component={DashboardComponent} />
                     <AuthenicatedRoute path="/users/:name/dashboard/administration" exact component={ManageUserComponent} />
                     <AuthenicatedRoute path="/users/:name/dashboard/projects/add" exact component={DashboardAddProject} />
