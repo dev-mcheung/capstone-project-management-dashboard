@@ -45,21 +45,26 @@ public class Project {
     @Column(name="current_status", nullable = false)
     private String currentStatus;
 
-    @Column(name="created_by", nullable = false)
-    private String createdBy;
+//    @Column(name="created_by", nullable = false)
+//    private String createdBy;
 
     @Column(name="priority", nullable = false)
     private String priority;
 
-    public Project(long project_id, String title, String description, Date creationDate, Date deadline, String currentStatus, String createdBy, String priority) {
+    @ManyToOne
+    @JoinColumn(name = "account")
+    private Account createdBy;
+
+    public Project(long project_id, String title, String description, Date creationDate, Date deadline, String currentStatus, String priority, Account createdBy) {
         this.project_id = project_id;
         this.title = title;
         this.description = description;
         this.creationDate = creationDate;
         this.deadline = deadline;
         this.currentStatus = currentStatus;
-        this.createdBy = createdBy;
+//        this.createdBy = createdBy;
         this.priority = priority;
+        this.createdBy = createdBy;
     }
 
     public Project () {}
@@ -112,13 +117,13 @@ public class Project {
         this.currentStatus = currentStatus;
     }
 
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
+//    public String getCreatedBy() {
+//        return createdBy;
+//    }
+//
+//    public void setCreatedBy(String createdBy) {
+//        this.createdBy = createdBy;
+//    }
 
     public String getPriority() {
         return priority;
@@ -126,5 +131,13 @@ public class Project {
 
     public void setPriority(String priority) {
         this.priority = priority;
+    }
+
+    public Account getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(Account createdBy) {
+        this.createdBy = createdBy;
     }
 }
