@@ -1,12 +1,17 @@
 package com.project.management.dashboard.projectmanagementdashboard.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "accounts")
-public class Account {
+public class Account implements Serializable {
+
+    private static final long serialVersionUID = -2450920475684939211L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,15 +26,15 @@ public class Account {
     @Column(name="email_address", nullable = false)
     private String emailAddress;
 
-    @OneToMany(mappedBy = "createdBy")
+    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Project> projects = new ArrayList<Project>();
 
-    public Account(Long id, String username, String password, String emailAddress, List<Project> projects) {
+    public Account(Long id, String username, String password, String emailAddress) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.emailAddress = emailAddress;
-        this.projects = projects;
     }
 
     public Account() {

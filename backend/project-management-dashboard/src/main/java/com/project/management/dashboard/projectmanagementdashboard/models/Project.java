@@ -1,13 +1,13 @@
 package com.project.management.dashboard.projectmanagementdashboard.models;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "projects")
 public class Project {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long project_id;
@@ -45,26 +45,22 @@ public class Project {
     @Column(name="current_status", nullable = false)
     private String currentStatus;
 
-//    @Column(name="created_by", nullable = false)
-//    private String createdBy;
+    @ManyToOne
+    @JoinColumn(name="created_by", referencedColumnName = "username")
+    private Account createdBy;
 
     @Column(name="priority", nullable = false)
     private String priority;
 
-    @ManyToOne
-    @JoinColumn(name = "account")
-    private Account createdBy;
-
-    public Project(long project_id, String title, String description, Date creationDate, Date deadline, String currentStatus, String priority, Account createdBy) {
+    public Project(long project_id, String title, String description, Date creationDate, Date deadline, String currentStatus, Account createdBy, String priority) {
         this.project_id = project_id;
         this.title = title;
         this.description = description;
         this.creationDate = creationDate;
         this.deadline = deadline;
         this.currentStatus = currentStatus;
-//        this.createdBy = createdBy;
-        this.priority = priority;
         this.createdBy = createdBy;
+        this.priority = priority;
     }
 
     public Project () {}
