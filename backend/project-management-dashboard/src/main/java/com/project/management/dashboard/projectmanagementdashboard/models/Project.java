@@ -45,21 +45,21 @@ public class Project {
     @Column(name="current_status", nullable = false)
     private String currentStatus;
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="created_by", referencedColumnName = "username")
     private Account createdBy;
 
     @Column(name="priority", nullable = false)
     private String priority;
 
-    public Project(long project_id, String title, String description, Date creationDate, Date deadline, String currentStatus, Account createdBy, String priority) {
+    public Project(long project_id, String title, String description, Date creationDate, Date deadline, String currentStatus, String priority) {
         this.project_id = project_id;
         this.title = title;
         this.description = description;
         this.creationDate = creationDate;
         this.deadline = deadline;
         this.currentStatus = currentStatus;
-        this.createdBy = createdBy;
+//        this.createdBy = createdBy;
         this.priority = priority;
     }
 
