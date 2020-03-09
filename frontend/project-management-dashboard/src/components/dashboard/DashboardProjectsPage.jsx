@@ -62,7 +62,8 @@ class DashboardProjectsPage extends Component {
     } else {
       console.log(values);
       let id = this.props.match.params.id;
-      let username = values.createdBy;
+      let username = values.createdBy.username;
+      values.deadline = moment(values.deadline).format();
       DashboardDataService.updateProjectById(username, id, values).then(() =>
         this.props.history.push("/dashboard")
       );

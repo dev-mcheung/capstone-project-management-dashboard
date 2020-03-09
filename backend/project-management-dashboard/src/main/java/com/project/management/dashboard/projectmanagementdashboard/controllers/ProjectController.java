@@ -43,7 +43,7 @@ public class ProjectController {
                                                  @RequestBody Project project) {
 
         Project projectUpdated = projectRepository.getOne(id);
-
+        
         projectUpdated.setTitle(project.getTitle());
         projectUpdated.setDescription(project.getDescription());
         projectUpdated.setDeadline(project.getDeadline());
