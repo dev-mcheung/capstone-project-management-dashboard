@@ -2,8 +2,8 @@ import axios from "axios";
 import { API_URI } from "../../VariableProperties.js";
 
 class DashboardDataService {
-  addProject(name, data) {
-    return axios.post(`${API_URI}/users/${name}/dashboard/projects`, data);
+  addProject(username, data) {
+    return axios.post(`${API_URI}/users/${username}/dashboard/projects`, data);
   }
 
   retrieveAllProjects() {

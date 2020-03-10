@@ -6,7 +6,9 @@ import java.util.Date;
 
 @Entity
 @Table(name = "projects")
-public class Project {
+public class Project implements Serializable {
+
+    private static final long serialVersionUID = -1950965273953789529L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,21 +47,21 @@ public class Project {
     @Column(name="current_status", nullable = false)
     private String currentStatus;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="created_by", referencedColumnName = "username")
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="created_by", referencedColumnName = "id", nullable = false)
     private Account createdBy;
 
     @Column(name="priority", nullable = false)
     private String priority;
 
-    public Project(long project_id, String title, String description, Date creationDate, Date deadline, String currentStatus, String priority) {
+    public Project(long project_id, String title, String description, Date creationDate, Date deadline, String currentStatus, String priority, Account createdBy) {
         this.project_id = project_id;
         this.title = title;
         this.description = description;
         this.creationDate = creationDate;
         this.deadline = deadline;
         this.currentStatus = currentStatus;
-//        this.createdBy = createdBy;
+        this.createdBy = createdBy;
         this.priority = priority;
     }
 
@@ -112,14 +114,6 @@ public class Project {
     public void setCurrentStatus(String currentStatus) {
         this.currentStatus = currentStatus;
     }
-
-//    public String getCreatedBy() {
-//        return createdBy;
-//    }
-//
-//    public void setCreatedBy(String createdBy) {
-//        this.createdBy = createdBy;
-//    }
 
     public String getPriority() {
         return priority;

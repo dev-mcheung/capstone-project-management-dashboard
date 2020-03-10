@@ -2,6 +2,7 @@ package com.project.management.dashboard.projectmanagementdashboard.controllers;
 
 import com.project.management.dashboard.projectmanagementdashboard.models.Account;
 import com.project.management.dashboard.projectmanagementdashboard.models.Project;
+import com.project.management.dashboard.projectmanagementdashboard.models.data.AccountRepository;
 import com.project.management.dashboard.projectmanagementdashboard.models.data.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,9 @@ import java.util.List;
 public class ProjectController {
     @Autowired
     private ProjectRepository projectRepository;
+
+    @Autowired
+    private AccountRepository accountRepository;
 
     @GetMapping(path="/api/projects")
     public List<Project> getAllProjects() {
@@ -43,7 +47,7 @@ public class ProjectController {
                                                  @RequestBody Project project) {
 
         Project projectUpdated = projectRepository.getOne(id);
-        
+
         projectUpdated.setTitle(project.getTitle());
         projectUpdated.setDescription(project.getDescription());
         projectUpdated.setDeadline(project.getDeadline());
@@ -58,6 +62,9 @@ public class ProjectController {
     @PostMapping(path="/users/{username}/dashboard/projects")
     public ResponseEntity<Void> proccessAddProject(@RequestBody Project project,
                                                    @PathVariable String username) {
+
+        Account accountInfo = accountRepository.findByUsername(username);
+        project.setCreatedBy(accountRepository.getOne(accountInfo.getId()));
 
         Project addProject = projectRepository.save(project);
 

@@ -57,6 +57,7 @@ class DashboardProjectsPage extends Component {
   onSubmit(values) {
     if (this.props.match.params.id === "add") {
       let username = AuthenicationService.getUsername();
+      values.createdBy = { username: username };
       DashboardDataService.addProject(username, values);
       this.props.history.goBack();
     } else {

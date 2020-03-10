@@ -16,7 +16,6 @@ public class Account implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Long id;
 
     @Column(name="username", nullable = false)
@@ -31,7 +30,7 @@ public class Account implements Serializable {
     private String emailAddress;
 
     @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Project> projects = new ArrayList<Project>();
 
     public Account(Long id, String username, String password, String emailAddress) {
