@@ -23,7 +23,7 @@ export class DashboardApp extends Component {
             component={DashboardComponent}
           />
           <AuthenicatedRoute
-            path="/dashboard/administration"
+            path="/dashboard/administration/manage-users"
             exact
             component={ManageUserComponent}
           />

@@ -31,7 +31,7 @@ class HeaderComponent extends Component {
                   </Link>
                   <div className="navbar-dropdown">
                     <div className="navbar-item">
-                      <Link to={`/administration/manage-users`}>
+                      <Link to={`/dashboard/administration/manage-users`}>
                         Manage Users
                       </Link>
                     </div>
