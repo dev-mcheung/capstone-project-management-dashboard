@@ -25,7 +25,7 @@ export default function AdministrationPanel() {
                 </li>
               </ul>
             </div>
-            <div className="column is-4">
+            <div className="column is-9">
               <Switch>
                 {routes.map((route, index) => (
                   <Route
