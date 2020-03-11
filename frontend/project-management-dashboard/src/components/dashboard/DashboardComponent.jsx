@@ -53,7 +53,7 @@ class DashboardComponent extends Component {
       <>
         <DashboardNavComponent />
         <div className="container">
-          <table className="table">
+          <table className="table is-hoverable is-striped">
             <thead className="thead">
               <tr className="tr">
                 <th className="th">Title</th>
