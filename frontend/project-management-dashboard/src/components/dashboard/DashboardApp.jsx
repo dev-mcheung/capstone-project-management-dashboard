@@ -5,7 +5,8 @@ import FooterComponent from "./FooterComponent.jsx";
 import DashboardComponent from "./DashboardComponent.jsx";
 import HeaderComponent from "./HeaderComponent.jsx";
 import LogoutComponent from "./LogoutComponent.jsx";
-import ManageUserComponent from "../administration/addUser.jsx";
+import AdministrationPanel from "../administration/AdministrationPanel.jsx";
+import { ManageUserComponent } from "../administration/ManageUserComponent.jsx";
 import ErrorRoute from "./ErrorRoute.jsx";
 import DashboardProjectsPage from "./DashboardProjectsPage.jsx";
 import AuthenicatedRoute from "./AuthenicatedRoute.jsx";
@@ -23,10 +24,15 @@ export class DashboardApp extends Component {
             component={DashboardComponent}
           />
           <AuthenicatedRoute
+            path="/dashboard/administration"
+            exact
+            component={AdministrationPanel}
+          />
+          {/* <AuthenicatedRoute
             path="/dashboard/administration/manage-users"
             exact
-            component={ManageUserComponent}
-          />
+            children={<ManageUserComponent />}
+          /> */}
           <AuthenicatedRoute
             path="/dashboard/projects/:id"
             exact
