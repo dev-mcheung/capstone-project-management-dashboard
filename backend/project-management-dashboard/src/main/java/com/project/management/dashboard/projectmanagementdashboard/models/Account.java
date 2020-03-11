@@ -26,7 +26,6 @@ public class Account implements Serializable {
     private String password;
 
     @Column(name="email_address", nullable = false)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String emailAddress;
 
     @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL, orphanRemoval = true)
