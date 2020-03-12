@@ -98,7 +98,7 @@ export function AddUser() {
         validateOnBlur={true}
         onSubmit={values =>
           UserDataService.addUser(values).then(response => {
-            history.push("/dashboard/administrator/manage-users");
+            history.goBack();
           })
         }
       >
