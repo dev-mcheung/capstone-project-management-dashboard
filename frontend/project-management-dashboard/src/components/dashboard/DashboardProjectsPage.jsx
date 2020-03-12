@@ -12,8 +12,8 @@ class DashboardProjectsPage extends Component {
     this.state = {
       title: "",
       description: "",
-      priority: "Planning",
-      currentStatus: "Long Term",
+      priority: "Long Term",
+      currentStatus: "Planning",
       creationDate: new Date(),
       createdBy: `${AuthenicationService.getUsername()}`,
       deadline: new Date(),
@@ -58,8 +58,9 @@ class DashboardProjectsPage extends Component {
     if (this.props.match.params.id === "add") {
       let username = AuthenicationService.getUsername();
       values.createdBy = { username: username };
-      DashboardDataService.addProject(username, values);
-      this.props.history.goBack();
+      DashboardDataService.addProject(username, values).then(() =>
+        this.props.history.goBack()
+      );
     } else {
       console.log(values);
       let id = this.props.match.params.id;
