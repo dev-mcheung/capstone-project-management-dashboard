@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -28,15 +29,19 @@ public class Account implements Serializable {
     @Column(name="email_address", nullable = false)
     private String emailAddress;
 
+    @Column(name="date_created", nullable = false)
+    private Date dateCreated;
+
     @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Project> projects = new ArrayList<Project>();
 
-    public Account(Long id, String username, String password, String emailAddress) {
+    public Account(Long id, String username, String password, String emailAddress, Date dateCreated) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.emailAddress = emailAddress;
+        this.dateCreated = dateCreated;
     }
 
     public Account() {
@@ -73,6 +78,14 @@ public class Account implements Serializable {
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     public List<Project> getProjects() {

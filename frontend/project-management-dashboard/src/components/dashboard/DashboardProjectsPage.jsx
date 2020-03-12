@@ -12,8 +12,8 @@ class DashboardProjectsPage extends Component {
     this.state = {
       title: "",
       description: "",
-      priority: "",
-      currentStatus: "",
+      priority: "Planning",
+      currentStatus: "Long Term",
       creationDate: new Date(),
       createdBy: `${AuthenicationService.getUsername()}`,
       deadline: new Date(),

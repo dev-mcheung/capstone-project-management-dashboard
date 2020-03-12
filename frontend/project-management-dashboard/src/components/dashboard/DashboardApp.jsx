@@ -28,7 +28,10 @@ export class DashboardApp extends Component {
             component={AdministrationPanel}
           />
           <AuthenicatedRoute
-            path="/dashboard/administration/manage-users"
+            path={[
+              "/dashboard/administration/manage-users",
+              "/dashboard/administration/manage-users/add"
+            ]}
             exact
             children={AdministrationPanel}
           />

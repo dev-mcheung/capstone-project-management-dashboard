@@ -1,8 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
-import { ManageUserComponent } from "./ManageUserComponent.jsx";
+import { ManageUserComponent, AddUser } from "./ManageUserComponent.jsx";
 
 const routes = [
+  {
+    path: "/dashboard/administration/manage-users/add",
+    main: () => <AddUser />
+  },
   {
     path: "/dashboard/administration/manage-users",
     main: () => <ManageUserComponent />
