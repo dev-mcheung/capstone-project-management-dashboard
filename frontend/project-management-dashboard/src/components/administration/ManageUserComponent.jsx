@@ -3,6 +3,7 @@ import UserDataService from "../../api/dashboard/UserDataService";
 import { useHistory } from "react-router-dom";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import moment from "moment";
 
 export const ManageUserComponent = () => {
   let history = useHistory();
@@ -45,6 +46,9 @@ export const ManageUserComponent = () => {
             <tr className="tr" key={user.id}>
               <td className="td">{user.username}</td>
               <td className="td">{user.emailAddress}</td>
+              <td className="td">
+                {moment(user.dateCreated).format("MM/DD/YYYY")}
+              </td>
             </tr>
           ))}
         </tbody>
@@ -54,11 +58,6 @@ export const ManageUserComponent = () => {
 };
 
 export function AddUser() {
-  //   const [username, setUsername] = useState(undefined);
-  //   const [password, setPassword] = useState(undefined);
-  //   const [confirmPassword, setConfirmPassword] = useState(undefined);
-  //   const [email, setEmail] = useState(undefined);
-
   let history = useHistory();
   const passwordSchema = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm;
 
@@ -91,7 +90,8 @@ export function AddUser() {
           username: "",
           password: "",
           confirmPassword: "",
-          emailAddress: ""
+          emailAddress: "",
+          dateCreated: new Date()
         }}
         validationSchema={createAccountSchema}
         validateOnChange={true}
