@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import DashboardNavComponent from "./DashboardNavComponent";
+import { Link } from "react-router-dom";
 import DashboardDataService from "../../api/dashboard/DashboardDataService";
 import moment from "moment";
 import AuthenicationService from "./AuthenicationService";
@@ -9,12 +9,15 @@ class DashboardComponent extends Component {
     super(props);
     this.state = {
       projects: [],
+      filterProjects: [],
       showDeletePrompt: false,
       trackProjectId: 0
     };
     this.refreshProjects = this.refreshProjects.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
     this.deleteProject = this.deleteProject.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.filterList = this.filterList.bind(this);
   }
 
   componentDidMount() {
@@ -23,7 +26,7 @@ class DashboardComponent extends Component {
 
   refreshProjects() {
     DashboardDataService.retrieveAllProjects().then(response => {
-      this.setState({ projects: response.data });
+      this.setState({ projects: response.data, filterProjects: response.data });
     });
   }
 
@@ -48,10 +51,45 @@ class DashboardComponent extends Component {
     }
   }
 
+  handleChange(event) {
+    this.setState({ filterProjects: this.state.projects });
+  }
+
+  filterList(event) {
+    const updatedList = this.state.projects.filter(item => {
+      return (
+        item.title.toLowerCase().search(event.target.value.toLowerCase()) !== -1
+      );
+    });
+    this.setState({ filterProjects: updatedList });
+  }
+
   render() {
     return (
       <>
-        <DashboardNavComponent />
+        <div className="container">
+          <div className="level">
+            <div className="level-left">
+              <div className="field has-addons">
+                <input
+                  className="input"
+                  type="text"
+                  placeholder="Find a project"
+                  onClick={this.handleChange}
+                  onChange={this.filterList}
+                ></input>
+              </div>
+            </div>
+            <div className="level-right">
+              <Link
+                to={`/dashboard/projects/add`}
+                className="button is-success"
+              >
+                New Project
+              </Link>
+            </div>
+          </div>
+        </div>
         <div className="container">
           <table className="table is-hoverable is-striped">
             <thead className="thead">
@@ -66,7 +104,7 @@ class DashboardComponent extends Component {
               </tr>
             </thead>
             <tbody className="tbody">
-              {this.state.projects.map(project => (
+              {this.state.filterProjects.map(project => (
                 <tr className="tr" key={project.project_id}>
                   <td className="td">{project.title}</td>
                   <td className="td">{project.description}</td>
