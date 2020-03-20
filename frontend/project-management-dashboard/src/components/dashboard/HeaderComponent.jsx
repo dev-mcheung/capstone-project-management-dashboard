@@ -6,6 +6,7 @@ import AuthenicationService from "./AuthenicationService";
 class HeaderComponent extends Component {
   render() {
     const isLoggedIn = AuthenicationService.isLoggedIn();
+    const username = AuthenicationService.getUsername();
     return (
       <header>
         <nav className="navbar is-spaced">
@@ -43,7 +44,7 @@ class HeaderComponent extends Component {
               <div className="navbar-end">
                 <div className="navbar-item has-dropdown is-hoverable">
                   <a href="!#" className="navbar-link">
-                    Profile
+                    Hi {username}
                   </a>
                   <div className="navbar-dropdown">
                     <div className="navbar-item">
